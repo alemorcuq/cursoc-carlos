@@ -1,2 +1,1 @@
-# cursoc-carlos
-Curso Porgramación C moderno (II edición)
+# Curso Porgramación C moderno (II edición)
