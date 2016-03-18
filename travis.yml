@@ -1,0 +1,8 @@
+
+language: c
+compiler:
+  - gcc
+sudo: false # only for faster builds
+script:
+  - gcc helloworld.c -o helloworld
+  - ./helloworld
