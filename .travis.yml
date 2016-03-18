@@ -1,7 +1,15 @@
 language: c
+
 compiler:
   - gcc
+
+notifications:
+  email:
+    on_success: never
+    on_failure: change
+
 sudo: false # only for faster builds
+
 script:
   - gcc helloworld.c -o helloworld
   - ./helloworld
