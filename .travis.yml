@@ -8,8 +8,6 @@ notifications:
     on_success: never
     on_failure: never
 
-sudo: false # only for faster builds
-
 script:
   - gcc helloworld.c -o helloworld
   - ./helloworld
