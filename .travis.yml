@@ -10,4 +10,3 @@ notifications:
 
 script:
   - gcc helloworld.c -o helloworld
-  - ./helloworld
