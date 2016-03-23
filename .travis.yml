@@ -9,4 +9,4 @@ notifications:
     on_failure: never
 
 script:
-  -cd ./src && gcc helloworld.c -o helloworld
+  - cd ./src && gcc helloworld.c -o helloworld.out
