@@ -11,12 +11,12 @@ Entre estas herramientas cabe destacar **vim** (o cualquier otro editor de texto
 
 ### Anexo Clase 1
 #### Travis CI
-Travis CI es una herramienta que se utiliza para testear de manera automática y continua nuestro código (CI viene de Continuous Integration). Se integra rápidamente con GitHub.
+[Travis CI](https://travis-ci.com/) es una herramienta que se utiliza para testear de manera automática y continua nuestro código alojado en GitHub, para ello clona nuestro repositorio en un contenedor de [Docker](https://www.docker.com/).
 
-De tal manera que, mediante un _"sencillo"_ fichero YAML situado en la **raíz de nuestro repositorio**, podemos configurar una serie de test que la herramienta Travis pasa **automáticamente** cada vez que se realiza un **nuevo commit** en nuestro repositorio.
+De tal manera que, mediante un fichero YAML situado en la **raíz de nuestro repositorio**, podemos configurar una serie de test que la herramienta Travis CI pasa **automáticamente** cada vez que se realiza un **nuevo commit** en nuestro repositorio (CI viene de Continuous Integration).
 
 El fichero ```.travis.yml``` usado para esta primera clase es el siguiente:
-```<yaml>
+```
 language: c
 compiler:
   - gcc
@@ -24,13 +24,15 @@ script:
   - cd ./clase1 && gcc helloworld.c -o helloworld.out
 ```
 
-Como se puede observar primero se indica el **lenguaje** y el **compilador**, y posteriormente en el apartado _script_ se indican las **instrucciones** que se ejecutan para testear el código. Travis determina que nuestro programa pasa los tests si todas las instrucciones que hay en _script_ acaban devolviendo **0 (success)**, en cambio, si alguna de ellas devuelve **1 (error)**, Travis determina que los tests no han pasado.
+Como se puede observar, primero se indica el **lenguaje** y el **compilador**, y posteriormente en el apartado _script_ se indican las **instrucciones** que se ejecutan para testear el código. Travis determina que nuestro programa pasa los tests si todas las instrucciones que hay en _script_ acaban devolviendo **0 (success)**, en cambio, si alguna de ellas devuelve **1 (error)**, Travis determina que los tests no han pasado.
 
 En este caso el test simplemente comprueba que la aplicación compila de manera correcta, para ello primer hace ```cd clase1``` para situarnos en ese directorio (recordar que el fichero travis.yml se sitúa en el raíz del repositorio) y posteriormente compila el programa con ```gcc helloworld.c -o helloworld.out```.
 
-Como se puede ver al principio de este README, hay un _badge_ que pone **"Build | Passing"** en color **verde**, en caso de que los test de integración continua de Travis no fueran satisfactorio pondría algo así como **"Build | Failed"** en color **rojo**. Recordad, que esto se realiza de manera automática cada vez que se realiza un nuevo commit en el repositorio.
+Como se puede ver al principio de este README, hay un _badge_ titulado _"Build"_ en el que se indica el estado de los tests. Si este _badge_ luce de la siguiente manera ![badge](https://img.shields.io/badge/build-passing-green.svg) indica que los tests han pasado satisfactoriamente. En caso de que los test de integración continua de Travis no fueran satisfactorios tendríamos el siguiente _badge_ ![badge](https://img.shields.io/badge/build-failed-red.svg). Recordad, que esto se realiza de manera automática cada vez que se realiza un nuevo commit en el repositorio.
 
-Cabe destacar que los tests se realizan por repositorio y no por carpeta, de tal manera que en caso de que el repositorio esté compuesto por varios ejecutables diferentes, como puede ser el caso de este curso, en el que en cada práctica haya un ejercicio diferentes; el fichero ```.travis.yml``` es el mismo para todos, por tanto bajo la sección _script_ habría que ir poniendo la secuencia de órdenes para cambiar ```cd ruta_directorio``` y compilar ```gcc ...``` los diferentes programas. De igual modo, el resultado del test y por tanto el _badge_ hace referencia al conjunto de todos los ejecutables.
+Cabe destacar que los **tests** se realizan **por repositorio** y no por carpeta, de tal manera que en caso de que el repositorio esté compuesto por varios ejecutables diferentes, como puede ser el caso de este curso, en el que en cada práctica haya un ejercicio diferentes; el fichero ```.travis.yml``` es el mismo para todos, por tanto bajo la sección _script_ habría que ir poniendo la secuencia de órdenes para cambiar ```cd ruta_directorio``` y compilar ```gcc ...``` los diferentes programas. De igual modo, el resultado del test y por tanto el _badge_ hace referencia al conjunto de todos los ejecutables.
+
+En el siguiente enlace se puede **validar** que la **sintaxis** del fichero ```.travis.yml``` es correcta: http://lint.travis-ci.org/
 
 #### Gitignore
 Al igual que ocurre con Travis, Gitignore funciona mediante un fichero de configuración que se sitúa en el raíz de un repositorio.
