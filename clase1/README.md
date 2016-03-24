@@ -15,7 +15,7 @@ Entre estas herramientas cabe destacar **vim** (o cualquier otro editor de texto
 
 De tal manera que, mediante un fichero YAML situado en la **raíz de nuestro repositorio**, podemos configurar una serie de test que la herramienta Travis CI pasa **automáticamente** cada vez que se realiza un **nuevo commit** en nuestro repositorio (CI viene de Continuous Integration).
 
-El fichero ```.travis.yml``` usado para esta primera clase es el siguiente:
+El fichero _.travis.yml_ usado para esta primera clase es el siguiente:
 ```
 language: c
 compiler:
@@ -30,16 +30,16 @@ En este caso el test simplemente comprueba que la aplicación compila de manera 
 
 Como se puede ver al principio de este README, hay un _badge_ titulado _"Build"_ en el que se indica el estado de los tests. Si este _badge_ luce de la siguiente manera ![badge](https://img.shields.io/badge/build-passing-green.svg) indica que los tests han pasado satisfactoriamente. En caso de que los test de integración continua de Travis no fueran satisfactorios tendríamos el siguiente _badge_ ![badge](https://img.shields.io/badge/build-failed-red.svg). Recordad, que esto se realiza de manera automática cada vez que se realiza un nuevo commit en el repositorio.
 
-Cabe destacar que los **tests** se realizan **por repositorio** y no por carpeta, de tal manera que en caso de que el repositorio esté compuesto por varios ejecutables diferentes, como puede ser el caso de este curso, en el que en cada práctica haya un ejercicio diferentes; el fichero ```.travis.yml``` es el mismo para todos, por tanto bajo la sección _script_ habría que ir poniendo la secuencia de órdenes para cambiar ```cd ruta_directorio``` y compilar ```gcc ...``` los diferentes programas. De igual modo, el resultado del test y por tanto el _badge_ hace referencia al conjunto de todos los ejecutables.
+Cabe destacar que los **tests** se realizan **por repositorio** y no por carpeta, de tal manera que en caso de que el repositorio esté compuesto por varios ejecutables diferentes, como puede ser el caso de este curso, en el que en cada práctica haya un ejercicio diferentes; el fichero _.travis.yml_ es el mismo para todos, por tanto bajo la sección _script_ habría que ir poniendo la secuencia de órdenes para cambiar ```cd ruta_directorio``` y compilar ```gcc ...``` los diferentes programas. De igual modo, el resultado del test y por tanto el _badge_ hace referencia al conjunto de todos los ejecutables.
 
-En el siguiente enlace se puede **validar** que la **sintaxis** del fichero ```.travis.yml``` es correcta: http://lint.travis-ci.org/
+En el siguiente enlace se puede **validar** que la **sintaxis** del fichero _.travis.yml_ es correcta: http://lint.travis-ci.org/
 
 #### Gitignore
 Al igual que ocurre con Travis, Gitignore funciona mediante un fichero de configuración que se sitúa en el raíz de un repositorio.
 
-En este fichero ```.gitignore``` se encuentran el nombre de archivos y directorios a los cuales **NO se les realiza el control de versiones** con Git, es decir, ficheros que aunque estén en el sistema de ficheros de nuestro equipo no se añaden al repositorio ni se realiza un seguimiento de ellos.
+En este fichero _.gitignore_ se encuentran el nombre de archivos y directorios a los cuales **NO se les realiza el control de versiones** con Git, es decir, ficheros que aunque estén en el sistema de ficheros de nuestro equipo no se añaden al repositorio ni se realiza un seguimiento de ellos.
 
-El fichero ```.gitignore``` usado para este repositorio es:
+El fichero _.gitignore_ usado para este repositorio es:
 ```
 # Gitignore típico para C
 # Object files
