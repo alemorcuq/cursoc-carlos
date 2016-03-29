@@ -11,17 +11,17 @@ notifications:
 script:
     # Clase 1
     - cd ./clase1
-    - gcc helloworld.c -o helloworld.out
+    - gcc -std=c99 helloworld.c -o helloworld.out
     # Clase 2
         # Directorio tiposArraysCadenas
     - cd ../clase2/tiposArraysCadenas
-    - gcc printSize.c -o printSize.out
-    - gcc matrices.c -o matrices.out
-    - gcc cadenas.c -o cadenas.out
-    - gcc arrays.c -o arrays.out
+    - gcc -std=c99 printSize.c -o printSize.out
+    - gcc -std=c99 matrices.c -o matrices.out
+    - gcc -std=c99 cadenas.c -o cadenas.out
+    - gcc -std=c99 arrays.c -o arrays.out
         # Directorio punteros
     - cd ../punteros
-    - gcc matrices.c -o matrices.out
-    - gcc sintaxis.c -o sintaxis.out
-    - gcc magic.c -o magic.out
-    - gcc arraysPunteros.c -o arraysPunteros.out    
+    - gcc -std=c99 matrices.c -o matrices.out
+    - gcc -std=c99 sintaxis.c -o sintaxis.out
+    - gcc -std=c99 magic.c -o magic.out
+    - gcc -std=c99 arraysPunteros.c -o arraysPunteros.out    
