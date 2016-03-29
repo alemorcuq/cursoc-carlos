@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int main() {
-    int i = 0;         // Variable entera i
+    int i = 0;          // Variable entera i
     char c = 'c';       // Variable char c
 
     int *pi = &i;       // Puntero a entero apuntando a i
@@ -14,6 +14,6 @@ int main() {
     printf("Entero con variable =>\n\tDirección:%p\n\tValor:%d\n", &i, i);
     printf("Carácter con puntero =>\n\tDirección:%p\n\tValor:%c\n", pc, *pc);
     printf("Carácter con variable =>\n\tDirección:%p\n\tValor:%c\n", &c, c);
-    
+
     return 0;
 }
