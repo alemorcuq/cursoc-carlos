@@ -4,6 +4,7 @@
 [![Twitter](https://img.shields.io/badge/Twitter-carrodher-blue.svg)](https://twitter.com/carrodher)
 [![License](https://img.shields.io/badge/License-BY/NC-yellow.svg)](https://github.com/carrodher/cursoc-carlos/blob/master/LICENSE)
 
+###### Fecha: Viernes 18/03
 ### Resumen
 En este primer día de curso hemos visto algo de historia sobre los inicios de C, posteriormente hemos instalado las herramientas necesarias para seguir el curso.
 
