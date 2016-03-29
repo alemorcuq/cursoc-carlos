@@ -10,6 +10,8 @@ En esta segunda clase hemos hecho un repaso de las **variables** y **tipos de da
 
 Posteriormente hemos visto en profundida el concepto de **punteros**, por último se han establecido las **relaciones** que guardan **arrays y punteros**.
 
+Diapositivas [Tema 3](https://github.com/carrodher/cursoc-carlos/blob/master/Transparencias/T3.pdf)
+
 ### Ejercicios
 #### [Tipos, arrays y cadenas](https://github.com/carrodher/cursoc-carlos/tree/master/clase2/tiposArraysCadenas)
 - [printf y sizeof](https://github.com/carrodher/cursoc-carlos/blob/master/clase2/tiposArraysCadenas/printSize.c)
@@ -22,3 +24,5 @@ Posteriormente hemos visto en profundida el concepto de **punteros**, por últim
 - [Arrays y punteros](https://github.com/carrodher/cursoc-carlos/blob/master/clase2/punteros/arraysPunteros.c)
 - [Matrices](https://github.com/carrodher/cursoc-carlos/blob/master/clase2/punteros/matrices.c)
 - [Magic](https://github.com/carrodher/cursoc-carlos/blob/master/clase2/punteros/magic.c)
+
+Ejercicos [Tema 3](https://github.com/carrodher/cursoc-carlos/blob/master/Transparencias/T3-ej.pdf)
