@@ -1,6 +1,8 @@
 #include <stdio.h>
 
 int main() {
+
+    // TODO: Acabar estos ejercicios
     int vector1[] = {1, 2, 3, 4, 5};
     double vector2[] = {1.1, 2.2, 3.3, 4.4, 5.5};
     float vector3[5];
