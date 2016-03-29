@@ -10,6 +10,9 @@ En este primer día de curso hemos visto algo de historia sobre los inicios de C
 
 Entre estas herramientas cabe destacar **vim** (o cualquier otro editor de texto) y **Git/GitHub**. Este _sistema de control de versiones_ se usará durante todo el curso para realizar los ejercicios y las prácticas. Después de crear nuestro repositorio hicimos un ejemplo sencillo de código en C, el típico _Hola mundo_.
 
+Diapositivas [Tema 1](https://github.com/carrodher/cursoc-carlos/blob/master/Transparencias/T1.pdf)
+Diapositivas [Tema 2](https://github.com/carrodher/cursoc-carlos/blob/master/Transparencias/T2.pdf)
+
 ### Anexo Clase 1
 #### Travis CI
 [Travis CI](https://travis-ci.com/) es una herramienta que se utiliza para testear de manera automática y continua nuestro código alojado en GitHub, para ello clona nuestro repositorio en un contenedor de [Docker](https://www.docker.com/).
