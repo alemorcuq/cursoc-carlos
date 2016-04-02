@@ -24,4 +24,13 @@ script:
     - gcc -std=c99 matrices.c -o matrices.out
     - gcc -std=c99 sintaxis.c -o sintaxis.out
     - gcc -std=c99 magic.c -o magic.out
-    - gcc -std=c99 arraysPunteros.c -o arraysPunteros.out    
+    - gcc -std=c99 arraysPunteros.c -o arraysPunteros.out
+    # Clase 3
+        # Directorio estructurasEnumerados
+    - cd ../clase3/estructurasEnumerados
+    - gcc -std=c99 car.c -o car.out
+    - gcc -std=c99 person.c -o person.out
+        # Directorio macrosUnionesCampos
+    - cd ../macrosUnionesCampos
+    - gcc -std=c99 union.c -o union.out
+    - gcc -std=c99 mayusculas.c -o mayusculas.out
