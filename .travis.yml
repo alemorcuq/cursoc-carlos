@@ -27,7 +27,7 @@ script:
     - gcc -std=c99 arraysPunteros.c -o arraysPunteros.out
     # Clase 3
         # Directorio estructurasEnumerados
-    - cd ../clase3/estructurasEnumerados
+    - cd ../../clase3/estructurasEnumerados
     - gcc -std=c99 car.c -o car.out
     - gcc -std=c99 person.c -o person.out
         # Directorio macrosUnionesCampos
