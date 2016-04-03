@@ -34,3 +34,7 @@ script:
     - cd ../macrosUnionesCampos
     - gcc -std=c99 union.c -o union.out
     - gcc -std=c99 mayusculas.c -o mayusculas.out
+    - gcc -std=c99 chorradas.c -o chorradas.out
+        # Directorio cabecerasFunciones
+    - cd ../cabecerasFunciones
+    - gcc -std=c99 swap.c -o swap.out
