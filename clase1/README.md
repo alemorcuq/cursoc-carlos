@@ -1,8 +1,8 @@
 # Clase 1
-[![Build Status](https://travis-ci.org/carrodher/cursoc-carlos.svg?branch=master)](https://travis-ci.org/carrodher/cursoc-carlos)
+[![Build Status](https://travis-ci.org/carrodher/Modern-C-2ed.svg?branch=master)](https://travis-ci.org/carrodher/Modern-C-2ed)
 [![Linkedin](https://img.shields.io/badge/LinkedIn-Carlos-blue.svg)](https://es.linkedin.com/in/carlosrodriguezhernandez)
 [![Twitter](https://img.shields.io/badge/Twitter-carrodher-blue.svg)](https://twitter.com/carrodher)
-[![License](https://img.shields.io/badge/License-BY/NC-yellow.svg)](https://github.com/carrodher/cursoc-carlos/blob/master/LICENSE.md)
+[![License](https://img.shields.io/badge/License-BY/NC-yellow.svg)](https://github.com/carrodher/Modern-C-2ed/blob/master/LICENSE.md)
 
 ###### Fecha: Viernes 18/03
 ### Resumen
@@ -10,9 +10,9 @@ En este primer día de curso hemos visto algo de historia sobre los inicios de C
 
 Entre estas herramientas cabe destacar **vim** (o cualquier otro editor de texto) y **Git/GitHub**. Este _sistema de control de versiones_ se usará durante todo el curso para realizar los ejercicios y las prácticas. Después de crear nuestro repositorio hicimos un ejemplo sencillo de código en C, el típico _Hola mundo_.
 
-Diapositivas [Tema 1](https://github.com/carrodher/cursoc-carlos/blob/master/Transparencias/T1.pdf)
+Diapositivas [Tema 1](https://github.com/carrodher/Modern-C-2ed/blob/master/Transparencias/T1.pdf)
 
-Diapositivas [Tema 2](https://github.com/carrodher/cursoc-carlos/blob/master/Transparencias/T2.pdf)
+Diapositivas [Tema 2](https://github.com/carrodher/Modern-C-2ed/blob/master/Transparencias/T2.pdf)
 
 ### Anexo Clase 1
 #### Travis CI
@@ -80,4 +80,4 @@ El fichero _.gitignore_ usado para este repositorio es:
 Como se puede observar se realiza un filtrado por extensiones típicas que se desean ignorar, usando patrones tipo _expresiones regulares_. De esta manera se ignoran todos aquellos ficheros que son fruto de compilaciones, ejecutables, librerías, etc; los cuales son necesarios para la ejecución pero no aporta ninguna ventaja el hecho de compartirlos y realizar su seguimiento.
 
 #### Comandos básicos
-![alt tag](https://github.com/carrodher/cursoc-carlos/blob/master/clase1/comandosGit.png "Comandos Git")
+![alt tag](https://github.com/carrodher/Modern-C-2ed/blob/master/clase1/comandosGit.png "Comandos Git")
