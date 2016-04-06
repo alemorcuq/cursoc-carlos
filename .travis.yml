@@ -10,3 +10,4 @@ notifications:
     slack: proyectoscarlos:quyUXvpLXPctdsK53REk5ypl
 
 script:
+    - ls
