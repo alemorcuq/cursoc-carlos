@@ -90,8 +90,11 @@ int checkVecinas(struct mundo *a, int i, int j, FILE *fp){
                 fprintf(fp,"\t¿Check con [%d,%d]?\n",fila,columna);
                 // ¿Célula vecina válida viva?
                 if (a->tablero[fila][columna] == VIVA){
-                    fprintf(fp,"\t\t Vecina viva [%d,%d]\n",fila,columna);
+                    fprintf(fp,"\t\t Vecina viva en [%d,%d]\n",fila,columna);
                     cuenta++;
+                }
+                else {
+                    fprintf(fp,"\t\t Vecina muerta en [%d,%d]\n",fila,columna);
                 }
             }
             columna++;
@@ -100,6 +103,6 @@ int checkVecinas(struct mundo *a, int i, int j, FILE *fp){
         fila++;
     }
 
-    fprintf(fp,"\tCélula [%d,%d] => %d\n\n",i,j,cuenta);
+    fprintf(fp,"\tCélula [%d,%d] => %d vecinas vivas\n\n",i,j,cuenta);
     return cuenta;
 }
