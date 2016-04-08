@@ -30,15 +30,5 @@ Finalmente se muestra por pantalla la matriz que representa el mundo en cada ite
 $ make all
 
 $ ./main.out
-
-Transición 7
-	- 	- 	- 	- 	- 	- 	- 	- 
-	- 	- 	- 	- 	- 	- 	- 	- 
-	- 	- 	o 	- 	- 	- 	- 	- 
-	- 	- 	- 	o 	o 	- 	- 	- 
-	- 	- 	o 	o 	- 	- 	- 	- 
-	- 	- 	- 	- 	- 	- 	- 	- 
-	- 	- 	- 	- 	- 	- 	- 	- 
-	- 	- 	- 	- 	- 	- 	- 	- 
-
 ```
+![alt tag](https://cloud.githubusercontent.com/assets/13216600/14388532/dac91774-fdae-11e5-91c8-4dafa88a84aa.png)

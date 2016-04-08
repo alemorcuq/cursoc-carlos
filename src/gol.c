@@ -8,11 +8,11 @@ void printTablero(struct mundo *m) {
         for (int j = 0; j < TAM; j++) {
             // Imprime "o" por célula viva
             if(m->tablero[i][j] == VIVA) {
-                printf(" o ");
+                printf(ANSI_COLOR_GREEN " o " ANSI_COLOR_RESET);
             }
             // Imprime "-" por célula muerta
             else {
-                printf(" - ");
+                printf(ANSI_COLOR_RED " - " ANSI_COLOR_RESET);
             }
         }
         printf("\n");
@@ -22,6 +22,8 @@ void printTablero(struct mundo *m) {
 // Realiza la lógica del juego, determina el nuevo estado (f) a partir del anterior (a)
 void transicion(struct mundo *a, struct mundo *f, FILE *fp){
     int contador = 0;   // Cuenta el número de células vivas para hacer transición
+    f->numCelVivas = 0;
+    f->numCelMuertas = 0;
 
     // Recorre el tablero
     for (int i = 0; i < TAM; i++) {
@@ -34,18 +36,13 @@ void transicion(struct mundo *a, struct mundo *f, FILE *fp){
                 if (contador == 3 || contador == 2) {
                     // Actualiza el estado en el tablero futuro
                     f->tablero[i][j] = VIVA;
-                    // +1 viva | -1 muerta
-                    f->numCelVivas++;
-                    f->numCelMuertas--;
                 }
                 // En otro caso muere
                 else {
                     // Actualiza el estado en el tablero futuro
                     f->tablero[i][j] = MUERTA;
-                    // +1 muerta | -1 viva
-                    f->numCelMuertas++;
-                    f->numCelVivas--;
                 }
+                f->numCelVivas++;
             }
             // Célula actual muerta
             else if (a->tablero[i][j] == MUERTA) {
@@ -53,22 +50,17 @@ void transicion(struct mundo *a, struct mundo *f, FILE *fp){
                 if (contador == 3) {
                     // Actualiza el estado en el tablero futuro
                     f->tablero[i][j] = VIVA;
-                    // +1 viva | -1 muerta
-                    f->numCelVivas++;
-                    f->numCelMuertas--;
                 }
                 // En otro caso permanece muerta
                 else {
                     // Actualiza el estado en el tablero futuro
                     f->tablero[i][j] = MUERTA;
-                    // +1 muerta | -1 viva
-                    f->numCelMuertas++;
-                    f->numCelVivas--;
                 }
+                f->numCelMuertas++;
             }
             // Comportamiento no deseado
             else {
-                printf("\t [ERROR]\t Se ha detectado célula zombie (Ni viva ni muerta)\n");
+                printf(ANSI_COLOR_RED "\t [ERROR]\t Se ha detectado célula zombie (Ni viva ni muerta)\n" ANSI_COLOR_RESET);
             }
         }
     }

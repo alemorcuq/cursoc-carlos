@@ -3,7 +3,7 @@
 
 int main() {
     // Estructura que guarda el mundo en su estado actual
-    struct mundo actual = {{{MUERTA,VIVA,MUERTA},{MUERTA,MUERTA,VIVA},{VIVA,VIVA,VIVA}},5,4,TAM*TAM};
+    struct mundo actual = {{{MUERTA,VIVA,MUERTA},{MUERTA,MUERTA,VIVA},{VIVA,VIVA,VIVA}},5,TAM*TAM-5,TAM*TAM};
     // Puntero a la estructura del mundo actual
     struct mundo *pactual = &actual;
 
@@ -24,6 +24,9 @@ int main() {
     // Bucle de simulaciones
     for (int k = 0; k < SIM; k++) {
         printf("Transición %d\n", k+1);
+        printf(ANSI_COLOR_GREEN "Células vivas: %d " ANSI_COLOR_RESET
+                ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
+                actual.numCelVivas, actual.numCelMuertas);
         fprintf(fp,"\n####### Transición %d ####### \n\n", k+1);
         // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
         transicion(pactual,pfuturo,fp);
