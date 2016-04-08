@@ -26,3 +26,19 @@ Para realizar la lógica del juego se usa la función _transicion()_ la cual rec
 Todo el proceso guarda logs en un fichero, donde se puede observar el resultado de todas las comprobaciones realizadas para determinar el estado de las células vecinas.
 
 Finalmente se muestra por pantalla la matriz que representa el mundo en cada iteracción.
+```
+$ make all
+
+$ ./main.out
+
+Transición 7
+	- 	- 	- 	- 	- 	- 	- 	- 
+	- 	- 	- 	- 	- 	- 	- 	- 
+	- 	- 	o 	- 	- 	- 	- 	- 
+	- 	- 	- 	o 	o 	- 	- 	- 
+	- 	- 	o 	o 	- 	- 	- 	- 
+	- 	- 	- 	- 	- 	- 	- 	- 
+	- 	- 	- 	- 	- 	- 	- 	- 
+	- 	- 	- 	- 	- 	- 	- 	- 
+
+```
