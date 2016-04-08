@@ -2,7 +2,7 @@
 #define _GOL_H_
 
 #define TAM 8   // Tamaño del tablero (Cuadrado de TAMxTAM)
-#define SIM 2   // Número de simulaciones
+#define SIM 8   // Número de simulaciones
 
 // Posibles estados de una célula
 enum estado {
