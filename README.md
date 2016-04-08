@@ -16,7 +16,7 @@ Las **transiciones** dependen del número de células vecinas vivas:
 - Una **célula muerta con exactamente 3 células vecinas vivas "nace"** (al turno siguiente estará viva).
 - Una **célula viva con 2 ó 3 células vecinas vivas sigue viva, en otro caso muere o permanece muerta** (por "soledad" o "superpoblación").
 
-### Versión 1
+### v1.0
 
 En esta primera versión se almacena el mundo (tablero + algunas variables) en una estructura. Se puede modificar el tamaño del mapa y el número de iteracciones.
 Se incializan dos estructuras para almacenar el mundo, una en la que se guarda el estado actual y otra sobre la que se va iterando para guardar el estado futuro.
