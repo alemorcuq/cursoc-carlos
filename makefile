@@ -1,3 +1,5 @@
+.PHONY: clean
+
 all: main
 
 main: main.o gol.o
@@ -8,3 +10,6 @@ main.o: src/main.c
 
 gol.o: src/gol.h src/gol.c
 	gcc -std=c99 -c src/gol.c
+
+clean:
+	rm -f *.o
