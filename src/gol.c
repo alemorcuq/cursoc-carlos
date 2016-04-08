@@ -8,11 +8,11 @@ void printTablero(struct mundo *m) {
         for (int j = 0; j < TAM; j++) {
             // Imprime "o" por célula viva
             if(m->tablero[i][j] == VIVA) {
-                printf("\to ");
+                printf(" o ");
             }
             // Imprime "-" por célula muerta
             else {
-                printf("\t- ");
+                printf(" - ");
             }
         }
         printf("\n");
