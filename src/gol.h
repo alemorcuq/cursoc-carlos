@@ -27,10 +27,10 @@ struct mundo {
 void printTablero(struct mundo *m);
 
 // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
-void transicion(struct mundo *a, struct mundo *f, FILE *fp);
+void transicion(struct mundo *a, struct mundo *f);
 
 /* Recibe las coordenadas de una célula y comprueba el estado de sus vecinas
 Devuelve el número de células vivas a su alrededor*/
-int checkVecinas(struct mundo *a, int i, int j, FILE *fp);
+int checkVecinas(struct mundo *a, int i, int j);
 
 #endif

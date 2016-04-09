@@ -1,6 +1,6 @@
 .PHONY: clean
 
-all: main clean
+all: main
 
 main: main.o gol.o
 	gcc -std=c99 main.o gol.o -o main.out
