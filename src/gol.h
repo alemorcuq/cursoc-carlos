@@ -1,6 +1,10 @@
 #ifndef _GOL_H_
 #define _GOL_H_
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
 #define TAM 8       // Tamaño del tablero (Cuadrado de TAMxTAM)
 #define SIM 25      // Número de simulaciones
 
@@ -32,5 +36,8 @@ void transicion(struct mundo *a, struct mundo *f);
 /* Recibe las coordenadas de una célula y comprueba el estado de sus vecinas
 Devuelve el número de células vivas a su alrededor*/
 int checkVecinas(struct mundo *a, int i, int j);
+
+// Comprueba que las células vecinas están dentro del tablero
+bool checkLimit(int x, int y);
 
 #endif

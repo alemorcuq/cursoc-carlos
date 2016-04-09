@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "gol.h"
 
 // Imprime el tablero
@@ -52,7 +50,7 @@ void transicion(struct mundo *a, struct mundo *f){
             // Comportamiento no deseado
             else {
                 printf(ANSI_COLOR_RED "\t [ERROR]\t Se ha detectado célula zombie (Ni viva ni muerta)\n" ANSI_COLOR_RESET);
-                exit(0);
+                exit(-1);
             }
         }
     }
@@ -62,22 +60,38 @@ void transicion(struct mundo *a, struct mundo *f){
 Devuelve el número de células vivas a su alrededor*/
 int checkVecinas(struct mundo *a, int i, int j){
     int cuenta = 0;
-    int fila = i-1;
-    int columna = j-1;
 
-    for (int k = 0; k < 3; k++) {
-        for (int l = 0; l < 3; l++) {
-            // Protege de comprobar fuera del mundo y contarse a si misma como vecina
-            if (columna < TAM && columna >= 0 && (fila != i || columna != j) && fila >= 0 && fila < TAM ) {
-                // ¿Célula vecina válida viva?
-                if (a->tablero[fila][columna] == VIVA)
-                    cuenta++;
-            }
-            columna++;
-        }
-        columna = j-1;
-        fila++;
-    }
+    int topi = i-1;     // Fila superior
+    int boti = i+1;     // Fila inferior
+    int leftj = j-1;    // Columna izquierda
+    int rightj = j+1;   // Columna derecha
+
+    /* Primero comprueba que la célula vecina está en el tablero (checkLimit)...
+    ... en caso de estarlo comprueba su estado () */
+    if (checkLimit(topi,leftj) && a->tablero[topi][leftj] == VIVA)      // Diagonal superior izq
+        cuenta++;
+    if (checkLimit(topi,j) && a->tablero[topi][j] == VIVA)              // Superior central
+        cuenta++;
+    if (checkLimit(topi,rightj) && a->tablero[topi][rightj] == VIVA)    // Diagonal superior der
+        cuenta++;
+    if (checkLimit(i,leftj) && a->tablero[i][leftj] == VIVA)            // Izquierda
+        cuenta++;
+    if (checkLimit(i,rightj) && a->tablero[i][rightj] == VIVA)          // Derecha
+        cuenta++;
+    if (checkLimit(boti,leftj) && a->tablero[boti][leftj] == VIVA)      // Diagonal inferior izq
+        cuenta++;
+    if (checkLimit(boti,j) && a->tablero[boti][j] == VIVA)              // Inferior central
+        cuenta++;
+    if (checkLimit(boti,rightj) && a->tablero[boti][rightj] == VIVA)    // Diagonal superior der
+        cuenta++;
 
     return cuenta;
+}
+
+// Comprueba que las células vecinas están dentro del tablero
+bool checkLimit(int x, int y) {
+    if (y >= 0 && y < TAM && x >= 0 && x < TAM)
+        return true;
+    else
+        return false;
 }

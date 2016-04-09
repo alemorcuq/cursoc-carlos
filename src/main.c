@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "gol.h"
 
 int main() {
@@ -12,16 +11,9 @@ int main() {
     // Puntero a la estructura del mundo futuro
     struct mundo *pfuturo = &futuro;
 
-    // Imprime el mundo al inicio
-    printf("Estado incial\n");
-    printf(ANSI_COLOR_GREEN "Células vivas: %d " ANSI_COLOR_RESET
-            ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
-            actual.numCelVivas, actual.numCelMuertas);
-    printTablero(pactual);
-
     // Bucle de simulaciones
     for (int k = 0; k < SIM; k++) {
-        printf("Transición %d\n", k+1);
+        printf("Estado %d\n", k+1);
         // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
         transicion(pactual,pfuturo);
 
