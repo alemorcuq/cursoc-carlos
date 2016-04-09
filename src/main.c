@@ -14,19 +14,22 @@ int main() {
 
     // Imprime el mundo al inicio
     printf("Estado incial\n");
+    printf(ANSI_COLOR_GREEN "Células vivas: %d " ANSI_COLOR_RESET
+            ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
+            actual.numCelVivas, actual.numCelMuertas);
     printTablero(pactual);
 
     // Bucle de simulaciones
     for (int k = 0; k < SIM; k++) {
         printf("Transición %d\n", k+1);
-        printf(ANSI_COLOR_GREEN "Células vivas: %d " ANSI_COLOR_RESET
-                ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
-                futuro.numCelVivas, futuro.numCelMuertas);
         // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
         transicion(pactual,pfuturo);
 
         // Imprime el mundo en cada iteracción
-        printTablero(pfuturo);
+        printf(ANSI_COLOR_GREEN "Células vivas: %d " ANSI_COLOR_RESET
+                ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
+                actual.numCelVivas, actual.numCelMuertas);
+        printTablero(pactual);
         printf("\n");
 
         /* Actualiza el mundo para la siguiente iteracción

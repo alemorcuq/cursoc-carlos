@@ -21,8 +21,8 @@ void printTablero(struct mundo *m) {
 // Realiza la lógica del juego, determina el nuevo estado (f) a partir del anterior (a)
 void transicion(struct mundo *a, struct mundo *f){
     int contador = 0;   // Cuenta el número de células vivas para hacer transición
-    f->numCelVivas = 0;
-    f->numCelMuertas = 0;
+    a->numCelVivas = 0;
+    a->numCelMuertas = 0;
 
     // Recorre el tablero
     for (int i = 0; i < TAM; i++) {
@@ -37,7 +37,7 @@ void transicion(struct mundo *a, struct mundo *f){
                 // En otro caso muere
                 else
                     f->tablero[i][j] = MUERTA; // Actualiza el estado en el tablero futuro
-                f->numCelVivas++;
+                a->numCelVivas++;
             }
             // Célula actual muerta
             else if (a->tablero[i][j] == MUERTA) {
@@ -47,7 +47,7 @@ void transicion(struct mundo *a, struct mundo *f){
                 // En otro caso permanece muerta
                 else
                     f->tablero[i][j] = MUERTA; // Actualiza el estado en el tablero futuro
-                f->numCelMuertas++;
+                a->numCelMuertas++;
             }
             // Comportamiento no deseado
             else {
