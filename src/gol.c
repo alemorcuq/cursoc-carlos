@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "gol.h"
 
 // Imprime el tablero
@@ -61,6 +62,7 @@ void transicion(struct mundo *a, struct mundo *f, FILE *fp){
             // Comportamiento no deseado
             else {
                 printf(ANSI_COLOR_RED "\t [ERROR]\t Se ha detectado célula zombie (Ni viva ni muerta)\n" ANSI_COLOR_RESET);
+                exit(0);
             }
         }
     }
