@@ -1,17 +1,18 @@
 #ifndef _GOL_H_
 #define _GOL_H_
 
-#define TAM 8   // Tamaño del tablero (Cuadrado de TAMxTAM)
-#define SIM 25   // Número de simulaciones
+#define TAM 8       // Tamaño del tablero (Cuadrado de TAMxTAM)
+#define SIM 25      // Número de simulaciones
 
+// Código colores para imprimir el mapa
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
 #define ANSI_COLOR_RESET   "\x1b[0m"
 
 // Posibles estados de una célula
 enum estado {
-    MUERTA,
-    VIVA
+    MUERTA,     // Célula muerta (-)
+    VIVA        // Célula viva (o)
 };
 
 // Estructura del mundo
