@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 #define TAM 8       // Tamaño del tablero (Cuadrado de TAMxTAM)
 #define SIM 25      // Número de simulaciones
@@ -21,10 +22,9 @@ enum estado {
 
 // Estructura del mundo
 struct mundo {
-    int tablero[TAM][TAM];  // Tablero/Mapa del mundo
+    int *tablero;           // Tablero/Mapa del mundo
     int numCelVivas;        // Número de células vivas
     int numCelMuertas;      // Número de células muertas
-    int numCelTotales;      // Tamaño del mundo = Número células totales
 };
 
 // Imprime el tablero
