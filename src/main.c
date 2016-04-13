@@ -1,14 +1,28 @@
 #include "gol.h"
 
 int main() {
-    // Estructura que guarda el mundo en su estado actual
-    struct mundo actual = {{{MUERTA,VIVA,MUERTA},{MUERTA,MUERTA,VIVA},{VIVA,VIVA,VIVA}},5,TAM*TAM-5,TAM*TAM};
-    // Puntero a la estructura del mundo actual
-    struct mundo *pactual = &actual;
 
-    // Estructura en la que se va guardando las modificaciones
-    struct mundo futuro = actual;
-    // Puntero a la estructura del mundo futuro
+    // Estructuras que guardan el mundo en su estado actual y futuro
+    struct mundo actual;
+    struct mundo futuro;
+
+    // Reservamos dinámicamente el tablero actual y futuro
+    actual.tablero = (int*) calloc(TAM*TAM,sizeof(int));
+    futuro.tablero = (int*) calloc(TAM*TAM,sizeof(int));
+    if (!actual.tablero || !futuro.tablero) {
+        printf(ANSI_COLOR_RED "\t [ERROR]\t Fallo en la reserva de memoria \n" ANSI_COLOR_RESET);
+        return -1;
+    }
+
+    // Células formando Glider
+    *(actual.tablero + 0*TAM + 1) = VIVA;
+    *(actual.tablero + 1*TAM + 2) = VIVA;
+    *(actual.tablero + 2*TAM + 0) = VIVA;
+    *(actual.tablero + 2*TAM + 1) = VIVA;
+    *(actual.tablero + 2*TAM + 2) = VIVA;
+
+    // Puntero a las estructuras del mundo
+    struct mundo *pactual = &actual;
     struct mundo *pfuturo = &futuro;
 
     // Bucle de simulaciones
@@ -24,10 +38,13 @@ int main() {
         printTablero(pactual);
         printf("\n");
 
-        /* Actualiza el mundo para la siguiente iteracción
-        El actual de ahora es el futuro de antes */
-        actual = futuro;
+        /* Actualiza el mundo para la siguiente iteracción. Copia la memoria del
+        mundo futuro anterior, que será el actual en la siguiente */
+        memcpy(actual.tablero, futuro.tablero, TAM*TAM*sizeof(int));
     }
+    // Libera memoria
+    free(actual.tablero);
+    free(futuro.tablero);
 
     return 0;
 }

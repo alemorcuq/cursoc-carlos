@@ -6,7 +6,7 @@ void printTablero(struct mundo *m) {
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
             // Imprime "o" por célula viva
-            if(m->tablero[i][j] == VIVA)
+            if(*(m->tablero + i*TAM + j) == VIVA)
                 printf(ANSI_COLOR_GREEN " o " ANSI_COLOR_RESET);
             // Imprime "-" por célula muerta
             else
@@ -28,23 +28,23 @@ void transicion(struct mundo *a, struct mundo *f){
             // Devuelve el número de vecinas vivas
             contador = checkVecinas(a,i,j);
             // Célula actual viva
-            if (a->tablero[i][j] == VIVA) {
+            if (*(a->tablero + i*TAM + j) == VIVA) {
                 // Célula viva con 2 ó 3 células vecinas vivas sigue viva
                 if (contador == 3 || contador == 2)
-                    f->tablero[i][j] = VIVA; // Actualiza el estado en el tablero futuro
+                    *(f->tablero + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
                 // En otro caso muere
                 else
-                    f->tablero[i][j] = MUERTA; // Actualiza el estado en el tablero futuro
+                    *(f->tablero + i*TAM + j) = MUERTA; // Actualiza el estado en el tablero futuro
                 a->numCelVivas++;
             }
             // Célula actual muerta
-            else if (a->tablero[i][j] == MUERTA) {
+            else if (*(a->tablero + i*TAM + j) == MUERTA) {
                 // Una célula muerta con exactamente 3 células vecinas vivas nace
                 if (contador == 3)
-                    f->tablero[i][j] = VIVA; // Actualiza el estado en el tablero futuro
+                    *(f->tablero + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
                 // En otro caso permanece muerta
                 else
-                    f->tablero[i][j] = MUERTA; // Actualiza el estado en el tablero futuro
+                    *(f->tablero + i*TAM + j) = MUERTA; // Actualiza el estado en el tablero futuro
                 a->numCelMuertas++;
             }
             // Comportamiento no deseado
@@ -67,22 +67,22 @@ int checkVecinas(struct mundo *a, int i, int j){
     int rightj = j+1;   // Columna derecha
 
     /* Primero comprueba que la célula vecina está en el tablero (checkLimit)...
-    ... en caso de estarlo comprueba su estado () */
-    if (checkLimit(topi,leftj) && a->tablero[topi][leftj] == VIVA)      // Diagonal superior izq
+    ... en caso de estarlo comprueba su estado */
+    if (checkLimit(topi,leftj) && *(a->tablero + topi*TAM + leftj) == VIVA)      // Diagonal superior izq
         cuenta++;
-    if (checkLimit(topi,j) && a->tablero[topi][j] == VIVA)              // Superior central
+    if (checkLimit(topi,j) && *(a->tablero + topi*TAM + j) == VIVA)              // Superior central
         cuenta++;
-    if (checkLimit(topi,rightj) && a->tablero[topi][rightj] == VIVA)    // Diagonal superior der
+    if (checkLimit(topi,rightj) && *(a->tablero + topi*TAM + rightj) == VIVA)    // Diagonal superior der
         cuenta++;
-    if (checkLimit(i,leftj) && a->tablero[i][leftj] == VIVA)            // Izquierda
+    if (checkLimit(i,leftj) && *(a->tablero + i*TAM + leftj) == VIVA)            // Izquierda
         cuenta++;
-    if (checkLimit(i,rightj) && a->tablero[i][rightj] == VIVA)          // Derecha
+    if (checkLimit(i,rightj) && *(a->tablero + i*TAM + rightj) == VIVA)          // Derecha
         cuenta++;
-    if (checkLimit(boti,leftj) && a->tablero[boti][leftj] == VIVA)      // Diagonal inferior izq
+    if (checkLimit(boti,leftj) && *(a->tablero + boti*TAM + leftj) == VIVA)      // Diagonal inferior izq
         cuenta++;
-    if (checkLimit(boti,j) && a->tablero[boti][j] == VIVA)              // Inferior central
+    if (checkLimit(boti,j) && *(a->tablero + boti*TAM + j) == VIVA)              // Inferior central
         cuenta++;
-    if (checkLimit(boti,rightj) && a->tablero[boti][rightj] == VIVA)    // Diagonal superior der
+    if (checkLimit(boti,rightj) && *(a->tablero + boti*TAM + rightj) == VIVA)    // Diagonal superior der
         cuenta++;
 
     return cuenta;

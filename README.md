@@ -16,7 +16,14 @@ Las **transiciones** dependen del número de células vecinas vivas:
 - Una **célula muerta con exactamente 3 células vecinas vivas "nace"** (al turno siguiente estará viva).
 - Una **célula viva con 2 ó 3 células vecinas vivas sigue viva, en otro caso muere o permanece muerta** (por "soledad" o "superpoblación").
 
-### v1.0
+### v1.0: Versión inicial del juego de la vida
+```
+- Utiliza una programación modular y crea un makefile para automatizar la compilación
+- Representa el mundo mediante un array bidimensional de tamaño fijo
+- Ejecuta un numero fijo de iteraciones
+- Muestra el estado inicial y final del mundo mediante printf
+- Comprueba los resultados obtenidos con uno de los simuladores enlazados
+```
 
 En esta primera versión se almacena el mundo (tablero + algunas variables) en una estructura. Se puede modificar el tamaño del mapa y el número de iteracciones.
 Se incializan dos estructuras para almacenar el mundo, una en la que se guarda el estado actual y otra sobre la que se va iterando para guardar el estado futuro.
@@ -26,6 +33,17 @@ Para realizar la lógica del juego se usa la función _transicion()_ la cual rec
 Todo el proceso guarda logs en un fichero, donde se puede observar el resultado de todas las comprobaciones realizadas para determinar el estado de las células vecinas.
 
 Finalmente se muestra por pantalla la matriz que representa el mundo en cada iteracción.
+
+### v2.0: Utilizar reserva dinámica de memoria y objetos
+```
+- El tamaño del mundo debe poder elegirse en tiempo de ejecución
+- Descompón tu programa en los módulos y objeto(s) que creas convenientes.
+```
+
+A la versión anterior se ha modificado la reserva de memoria, antes se realizaba de manera estática dentro de la estructura, en cambio ahora se realiza de manera dinámica con calloc (así por defecto están todas muertas), se reservan dos bloques diferentes, uno para el estado actual y otro para el futuro.
+
+Para hacer el cambio del estado N al N+1 se copia el bloque de memoria futuro del estado N como el actual del N+1.
+
 ```
 $ make all
 
