@@ -13,3 +13,7 @@ gol.o: src/gol.h src/gol.c
 
 clean:
 	rm -f *.o
+
+valgrind: main.o gol.o
+	gcc -std=c99 -g main.o gol.o -o main.out
+	valgrind --leak-check=full ./main.out
