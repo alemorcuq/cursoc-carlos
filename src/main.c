@@ -1,29 +1,25 @@
 #include "gol.h"
+#include "mundo.h"
 
 int main() {
+    // Reserva memoria para las estructuras del mundo
+    struct mundo *pactual = mundo_alloc();
+    struct mundo *pfuturo = mundo_alloc();
 
-    // Estructuras que guardan el mundo en su estado actual y futuro
-    struct mundo actual;
-    struct mundo futuro;
-
-    // Reservamos dinámicamente el tablero actual y futuro
-    actual.tablero = (int*) calloc(TAM*TAM,sizeof(int));
-    futuro.tablero = (int*) calloc(TAM*TAM,sizeof(int));
-    if (!actual.tablero || !futuro.tablero) {
-        printf(ANSI_COLOR_RED "\t [ERROR]\t Fallo en la reserva de memoria \n" ANSI_COLOR_RESET);
+    // Comprueba la reserva
+    if(!pactual || !pfuturo)
         return -1;
-    }
+
+    // Reserva memoria para el tablero y comprueba la reserva
+    if(mundo_alloc_tablero(pactual, TAM) == -1 || mundo_alloc_tablero(pfuturo, TAM)  == -1)
+        return -1;
 
     // Células formando Glider
-    *(actual.tablero + 0*TAM + 1) = VIVA;
-    *(actual.tablero + 1*TAM + 2) = VIVA;
-    *(actual.tablero + 2*TAM + 0) = VIVA;
-    *(actual.tablero + 2*TAM + 1) = VIVA;
-    *(actual.tablero + 2*TAM + 2) = VIVA;
-
-    // Puntero a las estructuras del mundo
-    struct mundo *pactual = &actual;
-    struct mundo *pfuturo = &futuro;
+    *(mundo_get_tablero(pactual) + 0*TAM + 1) = VIVA;
+    *(mundo_get_tablero(pactual) + 1*TAM + 2) = VIVA;
+    *(mundo_get_tablero(pactual) + 2*TAM + 0) = VIVA;
+    *(mundo_get_tablero(pactual) + 2*TAM + 1) = VIVA;
+    *(mundo_get_tablero(pactual) + 2*TAM + 2) = VIVA;
 
     // Bucle de simulaciones
     for (int k = 0; k < SIM; k++) {
@@ -34,17 +30,17 @@ int main() {
         // Imprime el mundo en cada iteracción
         printf(ANSI_COLOR_GREEN "Células vivas: %d " ANSI_COLOR_RESET
                 ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
-                actual.numCelVivas, actual.numCelMuertas);
+                mundo_get_vivas(pactual), mundo_get_muertas(pactual));
         printTablero(pactual);
-        printf("\n");
 
         /* Actualiza el mundo para la siguiente iteracción. Copia la memoria del
         mundo futuro anterior, que será el actual en la siguiente */
-        memcpy(actual.tablero, futuro.tablero, TAM*TAM*sizeof(int));
+        pactual = mundo_clone(pactual, pfuturo);
     }
+
     // Libera memoria
-    free(actual.tablero);
-    free(futuro.tablero);
+    mundo_free(pactual);
+    mundo_free(pfuturo);
 
     return 0;
 }

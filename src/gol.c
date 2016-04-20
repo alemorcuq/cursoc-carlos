@@ -1,4 +1,5 @@
 #include "gol.h"
+#include "mundo.h"
 
 // Imprime el tablero
 void printTablero(struct mundo *m) {
@@ -6,7 +7,7 @@ void printTablero(struct mundo *m) {
     for (int i = 0; i < TAM; i++) {
         for (int j = 0; j < TAM; j++) {
             // Imprime "o" por célula viva
-            if(*(m->tablero + i*TAM + j) == VIVA)
+            if(*(mundo_get_tablero(m) + i*TAM + j) == VIVA)
                 printf(ANSI_COLOR_GREEN " o " ANSI_COLOR_RESET);
             // Imprime "-" por célula muerta
             else
@@ -18,9 +19,11 @@ void printTablero(struct mundo *m) {
 
 // Realiza la lógica del juego, determina el nuevo estado (f) a partir del anterior (a)
 void transicion(struct mundo *a, struct mundo *f){
-    int contador = 0;   // Cuenta el número de células vivas para hacer transición
-    a->numCelVivas = 0;
-    a->numCelMuertas = 0;
+    int contador = 0;                   // Cuenta el número de células vivas para hacer transición
+    int numCelVivas = 0;                // Almacena el nº de células vivas
+    int numCelMuertas = 0;              // Almacena el nº de células muertas
+    mundo_set_vivas(a,numCelVivas);
+    mundo_set_muertas(a,numCelMuertas);
 
     // Recorre el tablero
     for (int i = 0; i < TAM; i++) {
@@ -28,24 +31,26 @@ void transicion(struct mundo *a, struct mundo *f){
             // Devuelve el número de vecinas vivas
             contador = checkVecinas(a,i,j);
             // Célula actual viva
-            if (*(a->tablero + i*TAM + j) == VIVA) {
+            if (*(mundo_get_tablero(a) + i*TAM + j) == VIVA) {
                 // Célula viva con 2 ó 3 células vecinas vivas sigue viva
                 if (contador == 3 || contador == 2)
-                    *(f->tablero + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
+                    *(mundo_get_tablero(f) + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
                 // En otro caso muere
                 else
-                    *(f->tablero + i*TAM + j) = MUERTA; // Actualiza el estado en el tablero futuro
-                a->numCelVivas++;
+                    *(mundo_get_tablero(f) + i*TAM + j) = MUERTA; // Actualiza el estado en el tablero futuro
+                numCelVivas++;
+                mundo_set_vivas(a,numCelVivas);
             }
             // Célula actual muerta
-            else if (*(a->tablero + i*TAM + j) == MUERTA) {
+            else if (*(mundo_get_tablero(a) + i*TAM + j) == MUERTA) {
                 // Una célula muerta con exactamente 3 células vecinas vivas nace
                 if (contador == 3)
-                    *(f->tablero + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
+                    *(mundo_get_tablero(f) + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
                 // En otro caso permanece muerta
                 else
-                    *(f->tablero + i*TAM + j) = MUERTA; // Actualiza el estado en el tablero futuro
-                a->numCelMuertas++;
+                    *(mundo_get_tablero(f) + i*TAM + j) = MUERTA; // Actualiza el estado en el tablero futuro
+                numCelMuertas++;
+                mundo_set_muertas(a,numCelMuertas);
             }
             // Comportamiento no deseado
             else {
@@ -68,21 +73,21 @@ int checkVecinas(struct mundo *a, int i, int j){
 
     /* Primero comprueba que la célula vecina está en el tablero (checkLimit)...
     ... en caso de estarlo comprueba su estado */
-    if (checkLimit(topi,leftj) && *(a->tablero + topi*TAM + leftj) == VIVA)      // Diagonal superior izq
+    if (checkLimit(topi,leftj) && *(mundo_get_tablero(a) + topi*TAM + leftj) == VIVA)      // Diagonal superior izq
         cuenta++;
-    if (checkLimit(topi,j) && *(a->tablero + topi*TAM + j) == VIVA)              // Superior central
+    if (checkLimit(topi,j) && *(mundo_get_tablero(a) + topi*TAM + j) == VIVA)              // Superior central
         cuenta++;
-    if (checkLimit(topi,rightj) && *(a->tablero + topi*TAM + rightj) == VIVA)    // Diagonal superior der
+    if (checkLimit(topi,rightj) && *(mundo_get_tablero(a) + topi*TAM + rightj) == VIVA)    // Diagonal superior der
         cuenta++;
-    if (checkLimit(i,leftj) && *(a->tablero + i*TAM + leftj) == VIVA)            // Izquierda
+    if (checkLimit(i,leftj) && *(mundo_get_tablero(a) + i*TAM + leftj) == VIVA)            // Izquierda
         cuenta++;
-    if (checkLimit(i,rightj) && *(a->tablero + i*TAM + rightj) == VIVA)          // Derecha
+    if (checkLimit(i,rightj) && *(mundo_get_tablero(a) + i*TAM + rightj) == VIVA)          // Derecha
         cuenta++;
-    if (checkLimit(boti,leftj) && *(a->tablero + boti*TAM + leftj) == VIVA)      // Diagonal inferior izq
+    if (checkLimit(boti,leftj) && *(mundo_get_tablero(a) + boti*TAM + leftj) == VIVA)      // Diagonal inferior izq
         cuenta++;
-    if (checkLimit(boti,j) && *(a->tablero + boti*TAM + j) == VIVA)              // Inferior central
+    if (checkLimit(boti,j) && *(mundo_get_tablero(a) + boti*TAM + j) == VIVA)              // Inferior central
         cuenta++;
-    if (checkLimit(boti,rightj) && *(a->tablero + boti*TAM + rightj) == VIVA)    // Diagonal superior der
+    if (checkLimit(boti,rightj) && *(mundo_get_tablero(a) + boti*TAM + rightj) == VIVA)    // Diagonal superior der
         cuenta++;
 
     return cuenta;

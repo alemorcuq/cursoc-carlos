@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include "mundo.h"
 
 #define TAM 8       // Tamaño del tablero (Cuadrado de TAMxTAM)
-#define SIM 25      // Número de simulaciones
+#define SIM 5      // Número de simulaciones
 
 // Código colores para imprimir el mapa
 #define ANSI_COLOR_RED     "\x1b[31m"
@@ -18,13 +19,6 @@
 enum estado {
     MUERTA,     // Célula muerta (-)
     VIVA        // Célula viva (o)
-};
-
-// Estructura del mundo
-struct mundo {
-    int *tablero;           // Tablero/Mapa del mundo
-    int numCelVivas;        // Número de células vivas
-    int numCelMuertas;      // Número de células muertas
 };
 
 // Imprime el tablero
