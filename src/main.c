@@ -32,13 +32,23 @@ int main() {
                 ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
                 mundo_get_vivas(pactual), mundo_get_muertas(pactual));
         printTablero(pactual);
+        printf("\n");
 
         /* Actualiza el mundo para la siguiente iteracción. Copia la memoria del
-        mundo futuro anterior, que será el actual en la siguiente */
+        mundo futuro anterior, que será el actual en la siguiente, se hace en
+        tres pasos:
+            1.- Libera el tablero actual (se va a sobreescribir)
+            2.- Copia la estructura futuro en la actual
+            3.- Reserva memoria para el nuevo futuro
+         */
+        mundo_free_tablero(pactual);
         pactual = mundo_clone(pactual, pfuturo);
+        mundo_alloc_tablero(pfuturo, TAM);
     }
 
     // Libera memoria
+    mundo_free_tablero(pactual);
+    mundo_free_tablero(pfuturo);
     mundo_free(pactual);
     mundo_free(pfuturo);
 
