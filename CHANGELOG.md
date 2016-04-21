@@ -27,3 +27,12 @@ Para hacer el cambio del estado N al N+1 se copia el bloque de memoria futuro de
 
 - Haz que el tamaño de tu mundo se pueda pasar como argumentos al lanzar tu programa. Utiliza getoptlong
 - Utiliza las listas encadenadas del núcleo de linux para optimizar el recorrer las células vivas. Por cada una de las células vivas debes inspeccionar ésta y sus vecinas.
+
+Modificado el main para que acepte parámetros al ejecutarse.
+```bash
+$ ./main.out -h
+./main.out -t tamaño -s simulaciones [-h]
+	 -t tamaño: Tamaño del tablero
+	 -s simulaciones: Número de simulaciones
+	 -h: Muestra esta ayuda
+```
