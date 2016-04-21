@@ -8,7 +8,7 @@
 #include "mundo.h"
 
 #define TAM 8       // Tamaño del tablero (Cuadrado de TAMxTAM)
-#define SIM 5      // Número de simulaciones
+#define SIM 25      // Número de simulaciones
 
 // Código colores para imprimir el mapa
 #define ANSI_COLOR_RED     "\x1b[31m"
