@@ -19,8 +19,13 @@ Las **transiciones** dependen del número de células vecinas vivas:
 ## Ejecución
 
 ```bash
-$ make all
+╰─$ make all
 
-$ ./main.out
+╰─$ ./main.out -h
+./main.out -t tamaño -s simulaciones [-r -h]
+	 -t tamaño: Tamaño del tablero
+	 -s simulaciones: Número de simulaciones
+	 -r: Inicializa el mundo con un estado aleatorio
+	 -h: Muestra esta ayuda
 ```
 ![alt tag](https://cloud.githubusercontent.com/assets/13216600/14388532/dac91774-fdae-11e5-91c8-4dafa88a84aa.png)
