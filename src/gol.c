@@ -100,3 +100,22 @@ bool checkLimit(int x, int y, int tam) {
     else
         return false;
 }
+
+// Inicializa el mundo con un estado aleatorio
+void mundoAleatorio(struct mundo *a, int tam) {
+    // Semilla en función de la hora
+    time_t t;
+    srand((unsigned) time(&t));
+
+    // Recorre el tablero
+    for (int i = 0; i < tam; i++) {
+        for (int j = 0; j < tam; j++) {
+            // Número aleatorio entre 0 y 1
+            // Si sale un 1, ponemos esa célula viva. Si sale 0, la ponemos viva
+            if (rand()%2 == 1)
+                *(mundo_get_tablero(a) + i*tam + j) = VIVA;
+            else
+                *(mundo_get_tablero(a) + i*tam + j) = MUERTA;
+        }
+    }
+}

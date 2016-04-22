@@ -6,6 +6,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <getopt.h>
+#include <time.h>
 #include "mundo.h"
 
 #define TAM 8       // Tamaño del tablero (Cuadrado de TAMxTAM)
@@ -28,6 +29,7 @@ static struct option long_options[] =
     {"help",         no_argument,          0,  'h'},
     {"tamaño",       required_argument,    0,  't'},
     {"simulaciones", required_argument,    0,  's'},
+    {"random",       no_argument,          0,  'r'},
     {0, 0, 0, 0}
 };
 
@@ -43,5 +45,8 @@ int checkVecinas(struct mundo *a, int i, int j,int tam);
 
 // Comprueba que las células vecinas están dentro del tablero
 bool checkLimit(int x, int y, int tam);
+
+// Inicializa el mundo con un estado aleatorio
+void mundoAleatorio(struct mundo *a, int tam);
 
 #endif

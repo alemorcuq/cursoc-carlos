@@ -30,9 +30,11 @@ Para hacer el cambio del estado N al N+1 se copia el bloque de memoria futuro de
 
 Modificado el main para que acepte parámetros al ejecutarse.
 ```bash
-$ ./main.out -h
-./main.out -t tamaño -s simulaciones [-h]
+╰─$ ./main.out -h
+./main.out -t tamaño -s simulaciones [-r -h]
 	 -t tamaño: Tamaño del tablero
 	 -s simulaciones: Número de simulaciones
+	 -r: Inicializa el mundo con un estado aleatorio
 	 -h: Muestra esta ayuda
 ```
+Añadida posibilidad de generar un mundo aleatorio en función de una semilla temporal.

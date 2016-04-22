@@ -22,4 +22,4 @@ clean:
 	rm -f *.o
 
 valgrind: debug
-	valgrind --leak-check=full ./main.out
+	valgrind --leak-check=full ./main.out -t 10 -s 20

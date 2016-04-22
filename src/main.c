@@ -3,9 +3,10 @@
 
 int main(int argc, char *argv[]) {
     int option_index, c, tam, sim;
-    bool help;
+    bool help = false;
+    bool random = false;
 
-    while ((c = getopt_long(argc, argv, "ht:s:", long_options, &option_index)) != -1) {
+    while ((c = getopt_long(argc, argv, "ht:s:r", long_options, &option_index)) != -1) {
         switch (c) {
             case 'h':
                 help = true;
@@ -16,6 +17,9 @@ int main(int argc, char *argv[]) {
             case 's':
                 sim = strtol(optarg, NULL, 0);
                 break;
+            case 'r':
+                random = true;
+                break;
             case '?':
                 help = true;
                 break;
@@ -23,13 +27,14 @@ int main(int argc, char *argv[]) {
     }
 
     if (help == true) {
-        printf("./main.out -t tamaño -s simulaciones [-h]\n");
+        printf("./main.out -t tamaño -s simulaciones [-r -h]\n");
         printf("\t -t tamaño: Tamaño del tablero\n");
         printf("\t -s simulaciones: Número de simulaciones\n");
+        printf("\t -r: Inicializa el mundo con un estado aleatorio\n");
         printf("\t -h: Muestra esta ayuda\n");
     }
     else if (tam == 0 || sim == 0) {
-        printf("Uso: ./main.out -t tamaño -s simulaciones [-h]\n");
+        printf("Uso: ./main.out -t tamaño -s simulaciones [-r -h]\n");
         printf("                      |          |-> Mayor que 0\n");
         printf("                      |-> Mayor que 0\n");
     }
@@ -39,19 +44,24 @@ int main(int argc, char *argv[]) {
     struct mundo *pfuturo = mundo_alloc();
 
     // Comprueba la reserva
-    if(!pactual || !pfuturo)
+    if (!pactual || !pfuturo)
         return -1;
 
     // Reserva memoria para el tablero y comprueba la reserva
-    if(mundo_alloc_tablero(pactual, tam) == -1 || mundo_alloc_tablero(pfuturo, tam)  == -1)
+    if (mundo_alloc_tablero(pactual, tam) == -1 || mundo_alloc_tablero(pfuturo, tam)  == -1)
         return -1;
 
-    // Células formando Glider
-    *(mundo_get_tablero(pactual) + 0*tam + 1) = VIVA;
-    *(mundo_get_tablero(pactual) + 1*tam + 2) = VIVA;
-    *(mundo_get_tablero(pactual) + 2*tam + 0) = VIVA;
-    *(mundo_get_tablero(pactual) + 2*tam + 1) = VIVA;
-    *(mundo_get_tablero(pactual) + 2*tam + 2) = VIVA;
+    if (random == false) {
+        // Células formando Glider
+        *(mundo_get_tablero(pactual) + 0*tam + 1) = VIVA;
+        *(mundo_get_tablero(pactual) + 1*tam + 2) = VIVA;
+        *(mundo_get_tablero(pactual) + 2*tam + 0) = VIVA;
+        *(mundo_get_tablero(pactual) + 2*tam + 1) = VIVA;
+        *(mundo_get_tablero(pactual) + 2*tam + 2) = VIVA;
+    }
+    else {
+        mundoAleatorio(pactual,tam);
+    }
 
     // Bucle de simulaciones
     for (int k = 0; k < sim; k++) {
