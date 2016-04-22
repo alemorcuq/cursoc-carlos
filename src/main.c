@@ -6,7 +6,7 @@ int main(int argc, char *argv[]) {
     bool help = false;
     bool random = false;
 
-    while ((c = getopt_long(argc, argv, "ht:s:r", long_options, &option_index)) != -1) {
+    while ((c = getopt_long(argc, argv, "t:s:rh", long_options, &option_index)) != -1) {
         switch (c) {
             case 'h':
                 help = true;
