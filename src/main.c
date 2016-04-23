@@ -47,8 +47,6 @@ int main() {
     }
 
     // Libera memoria
-    mundo_free_tablero(pactual);
-    mundo_free_tablero(pfuturo);
     mundo_free(pactual);
     mundo_free(pfuturo);
 
