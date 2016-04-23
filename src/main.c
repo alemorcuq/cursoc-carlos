@@ -11,9 +11,10 @@ int main() {
         return -1;
 
     // Reserva memoria para el tablero y comprueba la reserva
-    if(mundo_alloc_tablero(pactual, TAM) == -1 || mundo_alloc_tablero(pfuturo, TAM)  == -1)
+    if(mundo_alloc_tablero(pactual, TAM) == -1 || mundo_alloc_tablero(pfuturo, TAM)  == -1) {
+        perror("Error ");
         return -1;
-
+    }
     // Células formando Glider
     *(mundo_get_tablero(pactual) + 0*TAM + 1) = VIVA;
     *(mundo_get_tablero(pactual) + 1*TAM + 2) = VIVA;
