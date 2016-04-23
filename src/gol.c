@@ -31,7 +31,7 @@ void transicion(struct mundo *a, struct mundo *f){
             // Devuelve el número de vecinas vivas
             contador = checkVecinas(a,i,j);
             // Célula actual viva
-            if (*(mundo_get_tablero(a) + i*TAM + j) == VIVA) {
+            if (getCelula(i,j,a) == VIVA) {
                 // Célula viva con 2 ó 3 células vecinas vivas sigue viva
                 if (contador == 3 || contador == 2)
                     *(mundo_get_tablero(f) + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
@@ -42,7 +42,7 @@ void transicion(struct mundo *a, struct mundo *f){
                 mundo_set_vivas(a,numCelVivas);
             }
             // Célula actual muerta
-            else if (*(mundo_get_tablero(a) + i*TAM + j) == MUERTA) {
+            else if (getCelula(i,j,a) == MUERTA) {
                 // Una célula muerta con exactamente 3 células vecinas vivas nace
                 if (contador == 3)
                     *(mundo_get_tablero(f) + i*TAM + j) = VIVA; // Actualiza el estado en el tablero futuro
@@ -61,6 +61,11 @@ void transicion(struct mundo *a, struct mundo *f){
     }
 }
 
+// Accede al contenido de una célula
+int getCelula(int i, int j, struct mundo *m) {
+    return *(mundo_get_tablero(m) + i*TAM + j);
+}
+
 /* Recibe el mundo y las coordenadas de una célula y comprueba el estado de sus vecinas
 Devuelve el número de células vivas a su alrededor*/
 int checkVecinas(struct mundo *a, int i, int j){
@@ -73,21 +78,21 @@ int checkVecinas(struct mundo *a, int i, int j){
 
     /* Primero comprueba que la célula vecina está en el tablero (checkLimit)...
     ... en caso de estarlo comprueba su estado */
-    if (checkLimit(topi,leftj) && *(mundo_get_tablero(a) + topi*TAM + leftj) == VIVA)      // Diagonal superior izq
+    if (checkLimit(topi,leftj) && getCelula(topi,leftj,a) == VIVA)      // Diagonal superior izq
         cuenta++;
-    if (checkLimit(topi,j) && *(mundo_get_tablero(a) + topi*TAM + j) == VIVA)              // Superior central
+    if (checkLimit(topi,j) && getCelula(topi,j,a) == VIVA)              // Superior central
         cuenta++;
-    if (checkLimit(topi,rightj) && *(mundo_get_tablero(a) + topi*TAM + rightj) == VIVA)    // Diagonal superior der
+    if (checkLimit(topi,rightj) && getCelula(topi,rightj,a) == VIVA)    // Diagonal superior der
         cuenta++;
-    if (checkLimit(i,leftj) && *(mundo_get_tablero(a) + i*TAM + leftj) == VIVA)            // Izquierda
+    if (checkLimit(i,leftj) && getCelula(i,leftj,a) == VIVA)            // Izquierda
         cuenta++;
-    if (checkLimit(i,rightj) && *(mundo_get_tablero(a) + i*TAM + rightj) == VIVA)          // Derecha
+    if (checkLimit(i,rightj) && getCelula(i,rightj,a) == VIVA)          // Derecha
         cuenta++;
-    if (checkLimit(boti,leftj) && *(mundo_get_tablero(a) + boti*TAM + leftj) == VIVA)      // Diagonal inferior izq
+    if (checkLimit(boti,leftj) && getCelula(boti,leftj,a) == VIVA)      // Diagonal inferior izq
         cuenta++;
-    if (checkLimit(boti,j) && *(mundo_get_tablero(a) + boti*TAM + j) == VIVA)              // Inferior central
+    if (checkLimit(boti,j) && getCelula(boti,j,a) == VIVA)              // Inferior central
         cuenta++;
-    if (checkLimit(boti,rightj) && *(mundo_get_tablero(a) + boti*TAM + rightj) == VIVA)    // Diagonal superior der
+    if (checkLimit(boti,rightj) && getCelula(boti,rightj,a) == VIVA)    // Diagonal superior der
         cuenta++;
 
     return cuenta;

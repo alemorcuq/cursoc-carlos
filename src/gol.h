@@ -27,6 +27,9 @@ void printTablero(struct mundo *m);
 // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
 void transicion(struct mundo *a, struct mundo *f);
 
+// Accede al contenido de una célula
+int getCelula(int i, int j, struct mundo *m);
+
 /* Recibe las coordenadas de una célula y comprueba el estado de sus vecinas
 Devuelve el número de células vivas a su alrededor*/
 int checkVecinas(struct mundo *a, int i, int j);
