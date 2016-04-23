@@ -48,8 +48,10 @@ int main(int argc, char *argv[]) {
         return -1;
 
     // Reserva memoria para el tablero y comprueba la reserva
-    if (mundo_alloc_tablero(pactual, tam) == -1 || mundo_alloc_tablero(pfuturo, tam)  == -1)
+    if (mundo_alloc_tablero(pactual, tam) == -1 || mundo_alloc_tablero(pfuturo, tam)  == -1) {
+        perror("Error ");
         return -1;
+    }
 
     if (random == false) {
         // Células formando Glider
@@ -89,8 +91,6 @@ int main(int argc, char *argv[]) {
     }
 
     // Libera memoria
-    mundo_free_tablero(pactual);
-    mundo_free_tablero(pfuturo);
     mundo_free(pactual);
     mundo_free(pfuturo);
 

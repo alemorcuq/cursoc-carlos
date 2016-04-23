@@ -33,6 +33,9 @@ struct mundo *mundo_alloc(){
 
 // Libera el mundo
 void mundo_free(struct mundo *m) {
+    if (ATTR_IS_SET(m->flags, TABLERO))
+        free(m->tablero);   // Si se ha reservado memoria para el tablero, la libera
+
     free(m);                // Libera la reserva del objeto
 }
 
