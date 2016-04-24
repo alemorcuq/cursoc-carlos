@@ -8,6 +8,7 @@ struct mundo {
     int *tablero;           // Tablero/Mapa del mundo
     int numCelVivas;        // Número de células vivas
     int numCelMuertas;      // Número de células muertas
+    int tamanio;            // Tamaño del mundo
 
     int flags;              // Comprueba atributos
 };
@@ -16,7 +17,8 @@ struct mundo {
 enum mundo_attr {
     TABLERO,
     CELMUERTAS,
-    CELVIVAS
+    CELVIVAS,
+    TAMAN
 };
 
 /* Constructor/Destructor */
@@ -83,6 +85,18 @@ int mundo_set_muertas(struct mundo *m, int num) {
     return 0;
 }
 
+// Establece el tamaño del mundo
+int mundo_set_tam(struct mundo *m, int num) {
+    if (num < 0)
+        return -1;
+
+    // Guarda el valor y lo registra en el flag
+    m->tamanio = num;
+    ATTR_SET(m->flags, TAMAN);
+
+    return 0;
+}
+
     /* Getters */
 // Obtiene el tablero
 int *mundo_get_tablero(struct mundo *m) {
@@ -104,6 +118,14 @@ int mundo_get_vivas(struct mundo *m) {
 int mundo_get_muertas(struct mundo *m) {
     if (ATTR_IS_SET(m->flags, CELMUERTAS))
         return m->numCelMuertas;
+    else
+        return -1;
+}
+
+// Devuelve el tamaño del mundo
+int mundo_get_tam(struct mundo *m) {
+    if (ATTR_IS_SET(m->flags, TAMAN))
+        return m->tamanio;
     else
         return -1;
 }

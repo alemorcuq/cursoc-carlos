@@ -9,9 +9,6 @@
 #include <time.h>
 #include "mundo.h"
 
-#define TAM 8       // Tamaño del tablero (Cuadrado de TAMxTAM)
-#define SIM 25      // Número de simulaciones
-
 // Código colores para imprimir el mapa
 #define ANSI_COLOR_RED     "\x1b[31m"
 #define ANSI_COLOR_GREEN   "\x1b[32m"
@@ -34,22 +31,22 @@ static struct option long_options[] =
 };
 
 // Imprime el tablero
-void printTablero(struct mundo *m, int tam);
+void printTablero(struct mundo *m);
 
 // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
-void transicion(struct mundo *a, struct mundo *f, int tam);
+void transicion(struct mundo *a, struct mundo *f);
 
 // Accede al contenido de una célula
-int getCelula(int i, int j, struct mundo *m, int tam);
+int getCelula(int i, int j, struct mundo *m);
 
 /* Recibe las coordenadas de una célula y comprueba el estado de sus vecinas
 Devuelve el número de células vivas a su alrededor*/
-int checkVecinas(struct mundo *a, int i, int j,int tam);
+int checkVecinas(struct mundo *a, int i, int j);
 
 // Comprueba que las células vecinas están dentro del tablero
-bool checkLimit(int x, int y, int tam);
+bool checkLimit(int x, int y,int tam);
 
 // Inicializa el mundo con un estado aleatorio
-void mundoAleatorio(struct mundo *a, int tam);
+void mundoAleatorio(struct mundo *a);
 
 #endif

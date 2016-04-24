@@ -2,9 +2,11 @@
 #include "mundo.h"
 
 int main(int argc, char *argv[]) {
-    int option_index, c, tam, sim;
-    bool help = false;
-    bool random = false;
+    int option_index, c;
+    int tam = 8;            // Tamaño del mundo (default 8)
+    int sim = 25;           // Número de simulaciones (default 25)
+    bool help = false;      // Muestra ayuda
+    bool random = false;    // Genera mundo aleatorio
 
     while ((c = getopt_long(argc, argv, "t:s:rh", long_options, &option_index)) != -1) {
         switch (c) {
@@ -33,15 +35,14 @@ int main(int argc, char *argv[]) {
         printf("\t -r: Inicializa el mundo con un estado aleatorio\n");
         printf("\t -h: Muestra esta ayuda\n");
     }
-    else if (tam == 0 || sim == 0) {
-        printf("Uso: ./main.out -t tamaño -s simulaciones [-r -h]\n");
-        printf("                      |          |-> Mayor que 0\n");
-        printf("                      |-> Mayor que 0\n");
-    }
 
     // Reserva memoria para las estructuras del mundo
     struct mundo *pactual = mundo_alloc();
     struct mundo *pfuturo = mundo_alloc();
+
+    // Establece el tamaño de ambos mundos
+    mundo_set_tam(pactual,tam);
+    mundo_set_tam(pfuturo,tam);
 
     // Comprueba la reserva
     if (!pactual || !pfuturo)
@@ -62,20 +63,20 @@ int main(int argc, char *argv[]) {
         *(mundo_get_tablero(pactual) + 2*tam + 2) = VIVA;
     }
     else {
-        mundoAleatorio(pactual,tam);
+        mundoAleatorio(pactual);
     }
 
     // Bucle de simulaciones
     for (int k = 0; k < sim; k++) {
         printf("Estado %d\n", k+1);
         // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
-        transicion(pactual,pfuturo,tam);
+        transicion(pactual,pfuturo);
 
         // Imprime el mundo en cada iteracción
         printf(ANSI_COLOR_GREEN "Células vivas: %d " ANSI_COLOR_RESET
                 ANSI_COLOR_RED "Células muertas: %d\n" ANSI_COLOR_RESET,
                 mundo_get_vivas(pactual), mundo_get_muertas(pactual));
-        printTablero(pactual,tam);
+        printTablero(pactual);
         printf("\n");
 
         /* Actualiza el mundo para la siguiente iteracción. Copia la memoria del
