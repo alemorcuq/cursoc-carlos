@@ -42,8 +42,8 @@ void mundo_free(struct mundo *m) {
 }
 
 // Reserva el tablero
-int mundo_alloc_tablero(struct mundo *m, int tam){
-    m->tablero = (int*) calloc(tam*tam,sizeof(int));
+int mundo_alloc_tablero(struct mundo *m){
+    m->tablero = (int*) calloc(m->tamanio*m->tamanio,sizeof(int));
 
     if(m->tablero == NULL)
         return -1;

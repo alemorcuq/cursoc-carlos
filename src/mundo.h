@@ -10,12 +10,11 @@ struct mundo;
 struct mundo *mundo_alloc();
 void mundo_free(struct mundo *m);
 // Tablero
-int mundo_alloc_tablero(struct mundo *m, const int num);
+int mundo_alloc_tablero(struct mundo *m);
 void mundo_free_tablero(struct mundo *m);
 
 /* Métodos */
 // Setters
-int mundo_alloc_tablero(struct mundo *m, const int num);
 int mundo_set_vivas(struct mundo *m, const int num);
 int mundo_set_muertas(struct mundo *m, const int num);
 int mundo_set_tam(struct mundo *m, const int num);

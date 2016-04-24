@@ -49,7 +49,7 @@ int main(int argc, char *argv[]) {
         return -1;
 
     // Reserva memoria para el tablero y comprueba la reserva
-    if (mundo_alloc_tablero(pactual, tam) == -1 || mundo_alloc_tablero(pfuturo, tam)  == -1) {
+    if (mundo_alloc_tablero(pactual) == -1 || mundo_alloc_tablero(pfuturo)  == -1) {
         perror("Error ");
         return -1;
     }
@@ -88,7 +88,7 @@ int main(int argc, char *argv[]) {
          */
         mundo_free_tablero(pactual);
         pactual = mundo_clone(pactual, pfuturo);
-        mundo_alloc_tablero(pfuturo, tam);
+        mundo_alloc_tablero(pfuturo);
     }
 
     // Libera memoria
