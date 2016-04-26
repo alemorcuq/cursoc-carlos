@@ -66,6 +66,7 @@ void transicion(struct mundo *a, struct mundo *f){
 // Accede al contenido de una célula
 int getCelula(int i, int j, struct mundo *m) {
     int tam = mundo_get_tam(m);
+
     return *(mundo_get_tablero(m) + i*tam + j);
 }
 
@@ -128,4 +129,61 @@ void mundoAleatorio(struct mundo *a) {
                 *(mundo_get_tablero(a) + i*tam + j) = MUERTA;
         }
     }
+
+    return;
+}
+
+// Inicializa el mundo con un estado conocido
+void mundoConocido(struct mundo *m, char *c) {
+    int tam;
+    if (strcmp(c,"g") == 0) {
+        if (mundo_get_tam(m) < 5)
+            mundo_set_tam(m,6);
+        tam = mundo_get_tam(m);
+        // Células formando Glider
+        *(mundo_get_tablero(m) + 0*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 1*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 0) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+    }
+    else if (strcmp(c,"b") == 0) {
+        if (mundo_get_tam(m) < 3)
+            mundo_set_tam(m,4);
+        tam = mundo_get_tam(m);
+        // Células formando Blinker
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 3) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
+    }
+    else if (strcmp(c,"t") == 0) {
+        if (mundo_get_tam(m) < 4)
+            mundo_set_tam(m,5);
+        tam = mundo_get_tam(m);
+        // Células formando Toad
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 3) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
+        *(mundo_get_tablero(m) + 3*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 3*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 3*tam + 3) = VIVA;
+    }
+    else if (strcmp(c,"r") == 0) {
+        if (mundo_get_tam(m) < 10)
+            mundo_set_tam(m,11);
+        tam = mundo_get_tam(m);
+        // Células formando ten-Row
+        *(mundo_get_tablero(m) + 2*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 3) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 5) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 6) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 7) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 8) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 9) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 10) = VIVA;
+    }
+
+    return;
 }
