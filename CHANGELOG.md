@@ -38,3 +38,16 @@ Modificado el main para que acepte parámetros al ejecutarse.
 	 -h: Muestra esta ayuda
 ```
 Añadida posibilidad de generar un mundo aleatorio en función de una semilla temporal.
+
+### [v4.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v4.0 "4.0"): Entrada/Salida
+
+- [ ] Añade un parámetro de entrada más a tu programa `-f <fichero_config>` para pasarle un archivo de configuración donde tendrás guardados parámetros de la simulación. Haz un análisis simple de este fichero: las opciones con un formato estricto y siempre en el mismo orden.
+- [ ] Haz que al final de la simulación se guarde en un archivo un historial del número de células vivas en cada iteración. Utiliza un formato que depués puedas representar con un programa como gnuplot: `<num iteración><tabulación><num células vivas><nueva línea>`
+- [ ] EXTRA: Haz que al final de la simulación se guarde un archivo con el último estado del mundo, y que éste se pueda cargar al inicio del programa para continuar con la simulación.
+
+### [v5.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v5.0 "5.0"): Objetos(II): Herencia
+
+- [ ] Divide tu arquitectura en tres objetos:
+	- **world:** Objeto abstracto que no tienen implementada las funciones _world_get_cell_ y _world_set_cell_, pero sí el resto
+	- **world_normal:** Objeto que hereda de world e implementa las funciones _world_get_cell_ y _world_set_cell_ para acceder a un mundo finito con límites.
+	- **world_toroidal:** Objeto que hereda de world e implementa las funciones _world_get_cell_ y _world_set_cell_ para accedar al mundo de forma toroidal.
