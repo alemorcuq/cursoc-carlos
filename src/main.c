@@ -8,7 +8,12 @@ int main(int argc, char *argv[]) {
     bool help = false;      // Muestra ayuda
     bool random = false;    // Genera mundo aleatorio
 
-    while ((c = getopt_long(argc, argv, "t:s:rh", long_options, &option_index)) != -1) {
+    // Fichero de configuración
+    FILE *fp;
+    bool file = false;
+    char *filename;
+
+    while ((c = getopt_long(argc, argv, "t:s:f:rh", long_options, &option_index)) != -1) {
         switch (c) {
             case 'h':
                 help = true;
@@ -22,6 +27,10 @@ int main(int argc, char *argv[]) {
             case 'r':
                 random = true;
                 break;
+            case 'f':
+                file = true;
+                filename = optarg;
+                break;
             case '?':
                 help = true;
                 break;
@@ -29,11 +38,20 @@ int main(int argc, char *argv[]) {
     }
 
     if (help == true) {
-        printf("./main.out -t tamaño -s simulaciones [-r -h]\n");
+        printf("./main.out -t tamaño -s simulaciones -f fichero_config [-r -h]\n");
         printf("\t -t tamaño: Tamaño del tablero\n");
         printf("\t -s simulaciones: Número de simulaciones\n");
+        printf("\t -f fichero_config: Fichero de configuración\n");
         printf("\t -r: Inicializa el mundo con un estado aleatorio\n");
         printf("\t -h: Muestra esta ayuda\n");
+
+        return 0;
+    }
+
+    if (file == true) {
+        printf("Leyendo fichero de configuración...\n");
+        // Abre el fichero de configuración
+        fp = fopen(filename, "r");
     }
 
     // Reserva memoria para las estructuras del mundo
@@ -45,9 +63,10 @@ int main(int argc, char *argv[]) {
     mundo_set_tam(pfuturo,tam);
 
     // Comprueba la reserva
-    if (!pactual || !pfuturo)
-        return -1;
-
+    if (!pactual || !pfuturo) {
+       perror("Error ");
+       return -1;
+   }
     // Reserva memoria para el tablero y comprueba la reserva
     if (mundo_alloc_tablero(pactual) == -1 || mundo_alloc_tablero(pfuturo)  == -1) {
         perror("Error ");
@@ -55,12 +74,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (random == false) {
-        // Células formando Glider
-        *(mundo_get_tablero(pactual) + 0*tam + 1) = VIVA;
-        *(mundo_get_tablero(pactual) + 1*tam + 2) = VIVA;
-        *(mundo_get_tablero(pactual) + 2*tam + 0) = VIVA;
-        *(mundo_get_tablero(pactual) + 2*tam + 1) = VIVA;
-        *(mundo_get_tablero(pactual) + 2*tam + 2) = VIVA;
+        mundoConocido(pactual,"b");
     }
     else {
         mundoAleatorio(pactual);
@@ -82,16 +96,18 @@ int main(int argc, char *argv[]) {
         /* Actualiza el mundo para la siguiente iteracción. Copia la memoria del
         mundo futuro anterior, que será el actual en la siguiente, se hace en
         tres pasos:
-            1.- Libera el tablero actual (se va a sobreescribir)
-            2.- Copia la estructura futuro en la actual
-            3.- Reserva memoria para el nuevo futuro
-         */
+        1.- Libera el tablero actual (se va a sobreescribir)
+        2.- Copia la estructura futuro en la actual
+        3.- Reserva memoria para el nuevo futuro
+        */
         mundo_free_tablero(pactual);
         pactual = mundo_clone(pactual, pfuturo);
         mundo_alloc_tablero(pfuturo);
     }
 
     // Libera memoria
+    if (file == true)
+        fclose(fp);
     mundo_free(pactual);
     mundo_free(pfuturo);
 
