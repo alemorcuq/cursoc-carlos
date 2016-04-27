@@ -42,7 +42,7 @@ Añadida posibilidad de generar un mundo aleatorio en función de una semilla te
 ### [v4.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v4.0 "4.0"): Entrada/Salida
 
 - [x] Añade un parámetro de entrada más a tu programa `-f <fichero_config>` para pasarle un archivo de configuración donde tendrás guardados parámetros de la simulación. Haz un análisis simple de este fichero: las opciones con un formato estricto y siempre en el mismo orden.
-- [ ] Haz que al final de la simulación se guarde en un archivo un historial del número de células vivas en cada iteración. Utiliza un formato que depués puedas representar con un programa como gnuplot: `<num iteración><tabulación><num células vivas><nueva línea>`
+- [x] Haz que al final de la simulación se guarde en un archivo un historial del número de células vivas en cada iteración. Utiliza un formato que depués puedas representar con un programa como gnuplot: `<num iteración><tabulación><num células vivas><nueva línea>`
 - [ ] EXTRA: Haz que al final de la simulación se guarde un archivo con el último estado del mundo, y que éste se pueda cargar al inicio del programa para continuar con la simulación.
 
 ### [v5.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v5.0 "5.0"): Objetos(II): Herencia

@@ -55,11 +55,8 @@ int main(int argc, char *argv[]) {
 
     if (file == true) {
         printf("Leyendo fichero de configuración %s...\n", filename);
-        // Abre el fichero de configuración
-        fp = fopen(filename, "r");
-
-        // Comprueba la apertura
-        if (fp == NULL) {
+        // Abre el fichero de configuración y comprueba la apertura
+        if ((fp = fopen(filename, "r"))== NULL) {
            perror("Error ");
            return -1;
         }
@@ -75,6 +72,13 @@ int main(int argc, char *argv[]) {
         }
         fclose(fp);
     }
+
+    // Abre el fichero de log y comprueba la apertura
+    if ((fp = fopen("file.log", "w")) == NULL) {
+       perror("Error ");
+       return -1;
+    }
+    fprintf(fp, "Iter\tVivas\tMuertas\n");
 
     // Reserva memoria para las estructuras del mundo
     struct mundo *pactual = mundo_alloc();
@@ -107,7 +111,7 @@ int main(int argc, char *argv[]) {
 
     // Bucle de simulaciones
     for (int k = 0; k < sim; k++) {
-        printf("Estado %d\n", k+1);
+        printf("Iteracción %d\n", k+1);
         // Realiza la lógica del juego, determina el nuevo estado a partir del anterior
         transicion(pactual,pfuturo);
 
@@ -117,6 +121,8 @@ int main(int argc, char *argv[]) {
                 mundo_get_vivas(pactual), mundo_get_muertas(pactual));
         printTablero(pactual);
         printf("\n");
+
+        fprintf(fp, "<%d> \t<%d> \t<%d>\n",k+1,mundo_get_vivas(pactual), mundo_get_muertas(pactual));
 
         /* Actualiza el mundo para la siguiente iteracción. Copia la memoria del
         mundo futuro anterior, que será el actual en la siguiente, se hace en
@@ -129,6 +135,9 @@ int main(int argc, char *argv[]) {
         pactual = mundo_clone(pactual, pfuturo);
         mundo_alloc_tablero(pfuturo);
     }
+
+    // Cierra el fichero de logs
+    fclose(fp);
 
     // Libera memoria
     mundo_free(pactual);
