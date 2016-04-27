@@ -3,17 +3,18 @@
 
 int main(int argc, char *argv[]) {
     int option_index, c;
-    int tam = 8;            // Tamaño del mundo (default 8)
-    int sim = 25;           // Número de simulaciones (default 25)
-    bool help = false;      // Muestra ayuda
-    bool random = false;    // Genera mundo aleatorio
+    int tam = 8;                        // Tamaño del mundo (default 8)
+    int sim = 25;                       // Número de simulaciones (default 25)
+    bool help = false;                  // Muestra ayuda
+    bool random = false;                // Genera mundo aleatorio
+    char *estadoConocido = "glider";    // Estado inicial conocido
 
     // Fichero de configuración
     FILE *fp;
     bool file = false;
     char *filename;
 
-    while ((c = getopt_long(argc, argv, "t:s:f:rh", long_options, &option_index)) != -1) {
+    while ((c = getopt_long(argc, argv, "t:s:f:c:rh", long_options, &option_index)) != -1) {
         switch (c) {
             case 'h':
                 help = true;
@@ -31,6 +32,9 @@ int main(int argc, char *argv[]) {
                 file = true;
                 filename = optarg;
                 break;
+            case 'c':
+                estadoConocido = optarg;
+                break;
             case '?':
                 help = true;
                 break;
@@ -42,6 +46,7 @@ int main(int argc, char *argv[]) {
         printf("\t -t tamaño: Tamaño del tablero\n");
         printf("\t -s simulaciones: Número de simulaciones\n");
         printf("\t -f fichero_config: Fichero de configuración\n");
+        printf("\t -c [glider | blinker | toad | row]: Estado incial conocido\n");
         printf("\t -r: Inicializa el mundo con un estado aleatorio\n");
         printf("\t -h: Muestra esta ayuda\n");
 
@@ -74,7 +79,7 @@ int main(int argc, char *argv[]) {
     }
 
     if (random == false) {
-        mundoConocido(pactual,"b");
+        mundoConocido(pactual,estadoConocido);
     }
     else {
         mundoAleatorio(pactual);

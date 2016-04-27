@@ -129,14 +129,15 @@ void mundoAleatorio(struct mundo *a) {
                 *(mundo_get_tablero(a) + i*tam + j) = MUERTA;
         }
     }
-
+    printf("RANDOM\n");
+    
     return;
 }
 
 // Inicializa el mundo con un estado conocido
 void mundoConocido(struct mundo *m, char *c) {
     int tam;
-    if (strcmp(c,"g") == 0) {
+    if (strcmp(c,"glider") == 0) {
         if (mundo_get_tam(m) < 5)
             mundo_set_tam(m,6);
         tam = mundo_get_tam(m);
@@ -146,8 +147,9 @@ void mundoConocido(struct mundo *m, char *c) {
         *(mundo_get_tablero(m) + 2*tam + 0) = VIVA;
         *(mundo_get_tablero(m) + 2*tam + 1) = VIVA;
         *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        printf("GLIDER\n");
     }
-    else if (strcmp(c,"b") == 0) {
+    else if (strcmp(c,"blinker") == 0) {
         if (mundo_get_tam(m) < 3)
             mundo_set_tam(m,4);
         tam = mundo_get_tam(m);
@@ -155,8 +157,9 @@ void mundoConocido(struct mundo *m, char *c) {
         *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
         *(mundo_get_tablero(m) + 2*tam + 3) = VIVA;
         *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
+        printf("BLINKER\n");
     }
-    else if (strcmp(c,"t") == 0) {
+    else if (strcmp(c,"toad") == 0) {
         if (mundo_get_tam(m) < 4)
             mundo_set_tam(m,5);
         tam = mundo_get_tam(m);
@@ -167,8 +170,9 @@ void mundoConocido(struct mundo *m, char *c) {
         *(mundo_get_tablero(m) + 3*tam + 1) = VIVA;
         *(mundo_get_tablero(m) + 3*tam + 2) = VIVA;
         *(mundo_get_tablero(m) + 3*tam + 3) = VIVA;
+        printf("TOAD\n");
     }
-    else if (strcmp(c,"r") == 0) {
+    else if (strcmp(c,"row") == 0) {
         if (mundo_get_tam(m) < 10)
             mundo_set_tam(m,11);
         tam = mundo_get_tam(m);
@@ -183,6 +187,11 @@ void mundoConocido(struct mundo *m, char *c) {
         *(mundo_get_tablero(m) + 2*tam + 8) = VIVA;
         *(mundo_get_tablero(m) + 2*tam + 9) = VIVA;
         *(mundo_get_tablero(m) + 2*tam + 10) = VIVA;
+        printf("10-ROW\n");
+    }
+    else {
+        // Si ha habido un error => random
+        mundoAleatorio(m);
     }
 
     return;

@@ -26,7 +26,8 @@ static struct option long_options[] =
     {"help",         no_argument,          0,  'h'},
     {"tamaño",       required_argument,    0,  't'},
     {"simulaciones", required_argument,    0,  's'},
-    {"config",       required_argument,    0,  'f'},
+    {"fconf",        required_argument,    0,  'f'},
+    {"conocido",     required_argument,    0,  'c'},
     {"random",       no_argument,          0,  'r'},
     {0, 0, 0, 0}
 };
