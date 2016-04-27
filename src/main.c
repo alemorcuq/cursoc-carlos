@@ -7,7 +7,7 @@ int main(int argc, char *argv[]) {
     int sim = 25;                       // Número de simulaciones (default 25)
     bool help = false;                  // Muestra ayuda
     bool random = false;                // Genera mundo aleatorio
-    char *estadoConocido = "glider";    // Estado inicial conocido
+    char estadoConocido[10] = "gli";       // Estado inicial conocido (default glider)
 
     // Fichero de configuración
     FILE *fp;
@@ -33,7 +33,7 @@ int main(int argc, char *argv[]) {
                 filename = optarg;
                 break;
             case 'c':
-                estadoConocido = optarg;
+                strcpy(estadoConocido,optarg);
                 break;
             case '?':
                 help = true;
@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
         printf("\t -t tamaño: Tamaño del tablero\n");
         printf("\t -s simulaciones: Número de simulaciones\n");
         printf("\t -f fichero_config: Fichero de configuración\n");
-        printf("\t -c [glider | blinker | toad | row]: Estado incial conocido\n");
+        printf("\t -c [gli | bli | toa | row]: Estado incial conocido\n");
         printf("\t -r: Inicializa el mundo con un estado aleatorio\n");
         printf("\t -h: Muestra esta ayuda\n");
 
@@ -54,14 +54,34 @@ int main(int argc, char *argv[]) {
     }
 
     if (file == true) {
-        printf("Leyendo fichero de configuración...\n");
+        printf("Leyendo fichero de configuración %s...\n", filename);
         // Abre el fichero de configuración
         fp = fopen(filename, "r");
+
+        // Comprueba la apertura
+        if (fp == NULL) {
+           perror("Error ");
+           return -1;
+        }
+
+        char str[3];
+        fscanf(fp, "%s = %d\n",str,&tam);
+        fscanf(fp, "%s = %d\n",str,&sim);
+        fscanf(fp, "%s = %3s\n",str,estadoConocido);
+
+        if (ferror(fp)) {
+            perror("Error al leer");
+            return -1;
+        }
+        fclose(fp);
     }
 
     // Reserva memoria para las estructuras del mundo
     struct mundo *pactual = mundo_alloc();
     struct mundo *pfuturo = mundo_alloc();
+
+    printf("Tamaño: %d\n",tam);
+    printf("Número de simulaciones: %d\n\n",sim);
 
     // Establece el tamaño de ambos mundos
     mundo_set_tam(pactual,tam);
@@ -111,8 +131,6 @@ int main(int argc, char *argv[]) {
     }
 
     // Libera memoria
-    if (file == true)
-        fclose(fp);
     mundo_free(pactual);
     mundo_free(pfuturo);
 

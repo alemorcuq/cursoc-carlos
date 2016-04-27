@@ -130,14 +130,14 @@ void mundoAleatorio(struct mundo *a) {
         }
     }
     printf("RANDOM\n");
-    
+
     return;
 }
 
 // Inicializa el mundo con un estado conocido
 void mundoConocido(struct mundo *m, char *c) {
     int tam;
-    if (strcmp(c,"glider") == 0) {
+    if (strcmp(c,"gli") == 0) {
         if (mundo_get_tam(m) < 5)
             mundo_set_tam(m,6);
         tam = mundo_get_tam(m);
@@ -149,7 +149,7 @@ void mundoConocido(struct mundo *m, char *c) {
         *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
         printf("GLIDER\n");
     }
-    else if (strcmp(c,"blinker") == 0) {
+    else if (strcmp(c,"bli") == 0) {
         if (mundo_get_tam(m) < 3)
             mundo_set_tam(m,4);
         tam = mundo_get_tam(m);
@@ -159,7 +159,7 @@ void mundoConocido(struct mundo *m, char *c) {
         *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
         printf("BLINKER\n");
     }
-    else if (strcmp(c,"toad") == 0) {
+    else if (strcmp(c,"toa") == 0) {
         if (mundo_get_tam(m) < 4)
             mundo_set_tam(m,5);
         tam = mundo_get_tam(m);
