@@ -6,3 +6,8 @@
 
 # Executables
 *.out
+
+# Ficheros de configuración / Histórico / Estado
+state.txt
+file.log
+file.conf
