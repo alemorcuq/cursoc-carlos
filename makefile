@@ -3,7 +3,7 @@
 all: main
 
 # Establece la variable DEBUG en este objetivo y todos sus subobjetivos
-debug: DEBUG = -g
+debug: DEBUG = -ggdb
 debug: main
 
 main: main.o gol.o mundo.o
@@ -23,3 +23,6 @@ clean:
 
 valgrind: debug
 	valgrind --leak-check=full ./main.out -t 10 -s 20
+
+gdb: debug
+	gdb ./main.out
