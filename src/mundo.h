@@ -7,6 +7,7 @@ struct mundo;
 
 /* Constructor/Destructor */
 // Estructura mundo
+int mundo_build2(struct mundo * a, struct mundo *f, int t);
 struct mundo *mundo_alloc();
 void mundo_free(struct mundo *m);
 // Tablero

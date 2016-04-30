@@ -204,28 +204,19 @@ void printFinal(struct mundo *m) {
     // Abre el fichero de estado y comprueba la apertura
     FILE *fp;
     if (!(fp = fopen("state.txt", "w")))
-       perror("Error ");
+        perror("Error ");
 
     // Guarda el tamaño del mundo actual
     fprintf(fp,"%d\n",tam);
     if (ferror(fp))
         perror("Error al escribir");
-        
+
     // Recorre el tablero
     for (int i = 0; i < tam; i++) {
         for (int j = 0; j < tam; j++) {
-            // Imprime "o" por célula viva
-            if(*(mundo_get_tablero(m) + i*tam + j) == VIVA) {
-                fprintf(fp,"%d ",VIVA);
-                if (ferror(fp))
-                    perror("Error al escribir");
-            }
-            // Imprime "-" por célula muerta
-            else {
-                fprintf(fp,"%d ",MUERTA);
-                if (ferror(fp))
-                    perror("Error al escribir");
-            }
+            fprintf(fp,"%d ",*(mundo_get_tablero(m) + i*tam + j));
+            if (ferror(fp))
+                perror("Error al escribir");
         }
         fprintf(fp,"\n");
         if (ferror(fp))

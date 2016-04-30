@@ -22,6 +22,21 @@ enum mundo_attr {
 };
 
 /* Constructor/Destructor */
+// Constructor de mundo
+int mundo_build2(struct mundo * a, struct mundo *f, int t){
+    // Establece el tamaño de ambos mundos
+    mundo_set_tam(a,t);
+    mundo_set_tam(f,t);
+
+    // Reserva memoria para el tablero y comprueba la reserva
+    if (mundo_alloc_tablero(a) == -1 || mundo_alloc_tablero(f)  == -1) {
+        perror("Error ");
+        return -1;
+    }
+
+    return 0;
+}
+
 // Reserva el mundo
 struct mundo *mundo_alloc(){
     struct mundo *m;

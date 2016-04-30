@@ -99,16 +99,10 @@ int main(int argc, char *argv[]) {
     }
 
     if (random == false && estadoFile == false) {
-        // Establece el tamaño de ambos mundos
-        mundo_set_tam(pactual,tam);
-        mundo_set_tam(pfuturo,tam);
+        // Crea los dos mundos
+        mundo_build2(pactual, pfuturo, tam);
 
-        // Reserva memoria para el tablero y comprueba la reserva
-        if (mundo_alloc_tablero(pactual) == -1 || mundo_alloc_tablero(pfuturo)  == -1) {
-            perror("Error ");
-            return -1;
-        }
-
+        // Inicializa un mundo conocido
         mundoConocido(pactual,estadoConocido);
     }
     else if (estadoFile == true) {
@@ -126,15 +120,8 @@ int main(int argc, char *argv[]) {
             if (ferror(fpest) || (ret != 1))
                 perror("Error al leer");
 
-            // Establece el tamaño de ambos mundos
-            mundo_set_tam(pactual,tam);
-            mundo_set_tam(pfuturo,tam);
-
-            // Reserva memoria para el tablero y comprueba la reserva
-            if (mundo_alloc_tablero(pactual) == -1 || mundo_alloc_tablero(pfuturo)  == -1) {
-                perror("Error ");
-                return -1;
-            }
+            // Crea los dos mundos
+            mundo_build2(pactual, pfuturo, tam);
 
             // Recorre el tablero guardado en el fichero e inicializa el nuevo mundo
             for (int i = 0; i < tam; i++) {
@@ -156,19 +143,13 @@ int main(int argc, char *argv[]) {
         }
     }
     else {
-        // Establece el tamaño de ambos mundos
-        mundo_set_tam(pactual,tam);
-        mundo_set_tam(pfuturo,tam);
+        // Crea los dos mundos
+        mundo_build2(pactual, pfuturo, tam);
 
-        // Reserva memoria para el tablero y comprueba la reserva
-        if (mundo_alloc_tablero(pactual) == -1 || mundo_alloc_tablero(pfuturo)  == -1) {
-            perror("Error ");
-            return -1;
-        }
-
+        // Inicializa un mundo aleatorio
         mundoAleatorio(pactual);
     }
-    
+
     printf("Tamaño: %d\n",tam);
     printf("Número de simulaciones: %d\n\n",sim);
 
