@@ -86,7 +86,7 @@ int main(int argc, char *argv[]) {
     struct tm *sTm;
 
     time_t now = time (0);
-    sTm = gmtime (&now);
+    sTm = localtime(&now);
     strftime(buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
 
     FILE *fplog;
