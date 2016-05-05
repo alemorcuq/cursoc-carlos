@@ -9,6 +9,7 @@ struct mundo;
 // Estructura mundo
 int mundo_build2(struct mundo * a, struct mundo *f, int t);
 struct mundo *mundo_alloc();
+struct mundo *mundo_falloc(char *filename);
 void mundo_free(struct mundo *m);
 // Tablero
 int mundo_alloc_tablero(struct mundo *m);
@@ -28,5 +29,6 @@ int mundo_get_tam(struct mundo *m);
 
 // Clonar
 struct mundo *mundo_clone(struct mundo *actual, struct mundo *futuro);
+void mundo_save(struct mundo *m);
 
 #endif

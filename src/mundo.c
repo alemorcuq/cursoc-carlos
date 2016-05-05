@@ -48,6 +48,35 @@ struct mundo *mundo_alloc(){
     return m;
 }
 
+// Reserva el mundo cuando se le pasa en un fichero
+struct mundo *mundo_falloc(char *filename){
+    FILE *fpest;
+    printf("Leyendo fichero de estado anterior %s...\n", filename);
+    // Abre el fichero de estado y comprueba la apertura
+    if (!(fpest = fopen(filename, "r"))) {
+        perror("Error al abrir fichero ");
+        printf("Configuración predeterminada\n");
+    }
+
+    struct mundo *m = mundo_alloc();
+
+    // Lee el tamaño
+    fread(&m->tamanio, sizeof(int), 1, fpest);
+    if (ferror(fpest))
+        perror("Error al leer");
+
+    // Reserva el tablero
+    mundo_alloc_tablero(m);
+
+    // Lee el tablero
+    fread(m->tablero, sizeof(int), m->tamanio, fpest);
+    if (ferror(fpest))
+        perror("Error al leer");
+
+    fclose(fpest);
+    return m;
+}
+
 // Libera el mundo
 void mundo_free(struct mundo *m) {
     if (ATTR_IS_SET(m->flags, TABLERO))
@@ -152,4 +181,25 @@ struct mundo *mundo_clone(struct mundo *actual, struct mundo *futuro) {
     memcpy(actual, futuro, sizeof(struct mundo));
 
     return actual;
+}
+
+// Guarda el estado del mundo entre ejecuciones
+void mundo_save(struct mundo *m) {
+    // Abre el fichero de estado y comprueba la apertura
+    FILE *fp;
+    if (!(fp = fopen("state.txt", "w")))
+        perror("Error ");
+
+    // Guarda el tamaño
+    int tam = mundo_get_tam(m);
+    fwrite(&tam, sizeof(tam), 1, fp);
+    if (ferror(fp))
+        perror("Error al escribir");
+
+    // Guarda el tablero
+    fwrite(mundo_get_tablero(m), mundo_get_tam(m), sizeof(int), fp);
+    if (ferror(fp))
+        perror("Error al escribir");
+
+    fclose(fp);
 }

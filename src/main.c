@@ -82,70 +82,68 @@ int main(int argc, char *argv[]) {
     }
 
     // Abre el fichero de log y comprueba la apertura
+    char buff[20];
+    struct tm *sTm;
+
+    time_t now = time (0);
+    sTm = gmtime (&now);
+    strftime(buff, sizeof(buff), "%Y-%m-%d %H:%M:%S", sTm);
+
     FILE *fplog;
     if (!(fplog = fopen("file.log", "w")))
        perror("Error ");
+
+    fprintf(fplog, "%s\n", buff);
+    if (ferror(fplog))
+        perror("Error al escribir");
+
     fprintf(fplog, "Iter\tVivas\tMuertas\n");
     if (ferror(fplog))
         perror("Error al escribir");
 
-    // Reserva y comprueba la memoria para las estructuras del mundo
-    struct mundo *pactual = mundo_alloc();
-    struct mundo *pfuturo = mundo_alloc();
-
-    if (!pactual || !pfuturo) {
-       perror("Error ");
-       return -1;
-    }
+    struct mundo *pactual, *pfuturo;
 
     if (random == false && estadoFile == false) {
+        // Reserva y comprueba la memoria para las estructuras del mundo
+        pactual = mundo_alloc();
+        pfuturo = mundo_alloc();
+        if (!pactual || !pfuturo) {
+           perror("Error ");
+           return -1;
+        }
+
         // Crea los dos mundos
         mundo_build2(pactual, pfuturo, tam);
-
         // Inicializa un mundo conocido
         mundoConocido(pactual,estadoConocido);
     }
     else if (estadoFile == true) {
-        FILE *fpest;
-        printf("Leyendo fichero de estado anterior %s...\n", filename);
-        // Abre el fichero de estado y comprueba la apertura
-        if (!(fpest = fopen(filename, "r"))) {
-            perror("Error ");
-            printf("Configuración predeterminada\n");
-            mundoConocido(pactual,estadoConocido);
-        }
-        else {
-            // Leer tamaño mundo anterior
-            int ret = fscanf(fpest, "%d",&tam);
-            if (ferror(fpest) || (ret != 1))
-                perror("Error al leer");
-
-            // Crea los dos mundos
-            mundo_build2(pactual, pfuturo, tam);
-
-            // Recorre el tablero guardado en el fichero e inicializa el nuevo mundo
-            for (int i = 0; i < tam; i++) {
-                for (int j = 0; j < tam; j++) {
-                    int var;
-
-                    ret = fscanf(fpest, "%d",&var);
-                    if (ferror(fpest) || (ret != 1))
-                        perror("Error al leer");
-
-                    // Crea el nuevo tablero con los datos obtenidos
-                    if (var == VIVA)
-                        *(mundo_get_tablero(pactual) + i*tam + j) = VIVA;
-                    else
-                        *(mundo_get_tablero(pactual) + i*tam + j) = MUERTA;
-                }
-            }
-            fclose(fpest);
+        // Reserva a partir del fichero y comprueba la memoria para las estructuras del mundo
+        pactual = mundo_falloc(filename);
+        pfuturo = mundo_falloc(filename);
+        if (!pactual || !pfuturo) {
+           perror("Error reserva con fichero ");
+           // Se crean los mundos por defecto, sin fichero
+           // Reserva y comprueba la memoria para las estructuras del mundo
+           pactual = mundo_alloc();
+           pfuturo = mundo_alloc();
+           if (!pactual || !pfuturo) {
+              perror("Error ");
+              return -1;
+           }
         }
     }
     else {
+        // Reserva y comprueba la memoria para las estructuras del mundo
+        pactual = mundo_alloc();
+        pfuturo = mundo_alloc();
+        if (!pactual || !pfuturo) {
+           perror("Error ");
+           return -1;
+        }
+
         // Crea los dos mundos
         mundo_build2(pactual, pfuturo, tam);
-
         // Inicializa un mundo aleatorio
         mundoAleatorio(pactual);
     }
@@ -173,7 +171,7 @@ int main(int argc, char *argv[]) {
 
         // Imprime en un fichero el último estado
         if (k == sim-1)
-            printFinal(pactual);
+            mundo_save(pactual);
 
         /* Actualiza el mundo para la siguiente iteracción. Copia la memoria del
         mundo futuro anterior, que será el actual en la siguiente, se hace en
