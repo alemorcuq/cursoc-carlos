@@ -41,8 +41,8 @@ Añadida posibilidad de generar un mundo aleatorio en función de una semilla te
 
 ### [v4.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v4.0 "4.0"): Entrada/Salida
 
-- [ ] Añade un parámetro de entrada más a tu programa `-f <fichero_config>` para pasarle un archivo de configuración donde tendrás guardados parámetros de la simulación. Haz un análisis simple de este fichero: las opciones con un formato estricto y siempre en el mismo orden.
-- [ ] Haz que al final de la simulación se guarde en un archivo un historial del número de células vivas en cada iteración. Utiliza un formato que depués puedas representar con un programa como gnuplot: `<num iteración><tabulación><num células vivas><nueva línea>`
+- [x] Añade un parámetro de entrada más a tu programa `-f <fichero_config>` para pasarle un archivo de configuración donde tendrás guardados parámetros de la simulación. Haz un análisis simple de este fichero: las opciones con un formato estricto y siempre en el mismo orden.
+- [x] Haz que al final de la simulación se guarde en un archivo un historial del número de células vivas en cada iteración. Utiliza un formato que depués puedas representar con un programa como gnuplot: `<num iteración><tabulación><num células vivas><nueva línea>`
 - [ ] EXTRA: Haz que al final de la simulación se guarde un archivo con el último estado del mundo, y que éste se pueda cargar al inicio del programa para continuar con la simulación.
 
 ### [v5.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v5.0 "5.0"): Objetos(II): Herencia
@@ -51,3 +51,13 @@ Añadida posibilidad de generar un mundo aleatorio en función de una semilla te
 	- **world:** Objeto abstracto que no tienen implementada las funciones _world_get_cell_ y _world_set_cell_, pero sí el resto
 	- **world_normal:** Objeto que hereda de world e implementa las funciones _world_get_cell_ y _world_set_cell_ para acceder a un mundo finito con límites.
 	- **world_toroidal:** Objeto que hereda de world e implementa las funciones _world_get_cell_ y _world_set_cell_ para accedar al mundo de forma toroidal.
+
+### [v6.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v6.0 "6.0"): Interfaz gráfica con GTK
+
+- [ ] Usando como plantilla el código que se proporciona, crea una interfaz gráfica para tu juego de la vida, con al menos, las siguientes características:
+	- Se puede elegir el tamaño y el tipo del mundo antes de empezar la simulación
+	- Se puede detener y continuar la simulación
+	- Se puede avanzar la simulación paso a paso
+	- Se pueden añadir células vivas haciendo click izquierdo con el ratón en el área de dibujado
+	- Se pueden eliminar células vivas haciendo click derecho con el ratón en el área de dibujado
+	- Se puede elegir la velocidad de simulación
