@@ -43,7 +43,23 @@ Añadida posibilidad de generar un mundo aleatorio en función de una semilla te
 
 - [x] Añade un parámetro de entrada más a tu programa `-f <fichero_config>` para pasarle un archivo de configuración donde tendrás guardados parámetros de la simulación. Haz un análisis simple de este fichero: las opciones con un formato estricto y siempre en el mismo orden.
 - [x] Haz que al final de la simulación se guarde en un archivo un historial del número de células vivas en cada iteración. Utiliza un formato que depués puedas representar con un programa como gnuplot: `<num iteración><tabulación><num células vivas><nueva línea>`
-- [ ] EXTRA: Haz que al final de la simulación se guarde un archivo con el último estado del mundo, y que éste se pueda cargar al inicio del programa para continuar con la simulación.
+- [x] EXTRA: Haz que al final de la simulación se guarde un archivo con el último estado del mundo, y que éste se pueda cargar al inicio del programa para continuar con la simulación.
+
+Añadido todo lo anterior. Las opciones disponibles son:
+```bash
+╰─$ ./main.out -h
+./main.out [opciones]
+	 Opción 1: ./main.out -t tam -s sim [-c est ó -r]
+		 -t tamaño: Tamaño del tablero
+		 -s simulaciones: Número de simulaciones
+		 -c [gli | bli | toa | row]: Estado incial conocido
+		 -r: Inicializa el mundo con un estado aleatorio
+	 Opción 2: ./main.out -f file
+		 -f fichero_config: Fichero de configuración
+	 Opción 3: ./main.out -e file
+		 -e fichero_estado: Fichero de estado anterior
+	 -h: Muestra esta ayuda
+```
 
 ### [v5.0](https://github.com/carrodher/cursoc-carlos/releases/tag/v5.0 "5.0"): Objetos(II): Herencia
 

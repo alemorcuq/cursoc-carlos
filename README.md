@@ -22,10 +22,16 @@ Las **transiciones** dependen del número de células vecinas vivas:
 ╰─$ make all
 
 ╰─$ ./main.out -h
-./main.out -t tamaño -s simulaciones [-r -h]
-	 -t tamaño: Tamaño del tablero
-	 -s simulaciones: Número de simulaciones
-	 -r: Inicializa el mundo con un estado aleatorio
+./main.out [opciones]
+	 Opción 1: ./main.out -t tam -s sim [-c est ó -r]
+		 -t tamaño: Tamaño del tablero
+		 -s simulaciones: Número de simulaciones
+		 -c [gli | bli | toa | row]: Estado incial conocido
+		 -r: Inicializa el mundo con un estado aleatorio
+	 Opción 2: ./main.out -f file
+		 -f fichero_config: Fichero de configuración
+	 Opción 3: ./main.out -e file
+		 -e fichero_estado: Fichero de estado anterior
 	 -h: Muestra esta ayuda
 ```
 ![alt tag](https://cloud.githubusercontent.com/assets/13216600/14388532/dac91774-fdae-11e5-91c8-4dafa88a84aa.png)

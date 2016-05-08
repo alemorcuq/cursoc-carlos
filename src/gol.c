@@ -8,7 +8,7 @@ void printTablero(struct mundo *m) {
     for (int i = 0; i < tam; i++) {
         for (int j = 0; j < tam; j++) {
             // Imprime "o" por célula viva
-            if(*(mundo_get_tablero(m) + i*tam + j) == VIVA)
+            if(getCelula(i,j,m) == VIVA)
                 printf(ANSI_COLOR_GREEN " o " ANSI_COLOR_RESET);
             // Imprime "-" por célula muerta
             else
@@ -66,6 +66,7 @@ void transicion(struct mundo *a, struct mundo *f){
 // Accede al contenido de una célula
 int getCelula(int i, int j, struct mundo *m) {
     int tam = mundo_get_tam(m);
+
     return *(mundo_get_tablero(m) + i*tam + j);
 }
 
@@ -127,5 +128,98 @@ void mundoAleatorio(struct mundo *a) {
             else
                 *(mundo_get_tablero(a) + i*tam + j) = MUERTA;
         }
+    }
+    printf("RANDOM\n");
+
+    return;
+}
+
+// Inicializa el mundo con un estado conocido
+void mundoConocido(struct mundo *m, char *c) {
+    int tam;
+    if (strcmp(c,"gli") == 0) {
+        if (mundo_get_tam(m) < 5)
+            mundo_set_tam(m,6);
+        tam = mundo_get_tam(m);
+        // Células formando Glider
+        *(mundo_get_tablero(m) + 0*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 1*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 0) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        printf("GLIDER\n");
+    }
+    else if (strcmp(c,"bli") == 0) {
+        if (mundo_get_tam(m) < 3)
+            mundo_set_tam(m,4);
+        tam = mundo_get_tam(m);
+        // Células formando Blinker
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 3) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
+        printf("BLINKER\n");
+    }
+    else if (strcmp(c,"toa") == 0) {
+        if (mundo_get_tam(m) < 4)
+            mundo_set_tam(m,5);
+        tam = mundo_get_tam(m);
+        // Células formando Toad
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 3) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
+        *(mundo_get_tablero(m) + 3*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 3*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 3*tam + 3) = VIVA;
+        printf("TOAD\n");
+    }
+    else if (strcmp(c,"row") == 0) {
+        if (mundo_get_tam(m) < 10)
+            mundo_set_tam(m,11);
+        tam = mundo_get_tam(m);
+        // Células formando ten-Row
+        *(mundo_get_tablero(m) + 2*tam + 1) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 2) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 3) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 4) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 5) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 6) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 7) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 8) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 9) = VIVA;
+        *(mundo_get_tablero(m) + 2*tam + 10) = VIVA;
+        printf("10-ROW\n");
+    }
+    else {
+        // Si ha habido un error => random
+        mundoAleatorio(m);
+    }
+
+    return;
+}
+
+
+// Imprime en un fichero el último estado
+void printFinal(struct mundo *m) {
+    int tam = mundo_get_tam(m);
+    // Abre el fichero de estado y comprueba la apertura
+    FILE *fp;
+    if (!(fp = fopen("state.txt", "w")))
+        perror("Error ");
+
+    // Guarda el tamaño del mundo actual
+    fprintf(fp,"%d\n",tam);
+    if (ferror(fp))
+        perror("Error al escribir");
+
+    // Recorre el tablero
+    for (int i = 0; i < tam; i++) {
+        for (int j = 0; j < tam; j++) {
+            fprintf(fp,"%d ",*(mundo_get_tablero(m) + i*tam + j));
+            if (ferror(fp))
+                perror("Error al escribir");
+        }
+        fprintf(fp,"\n");
+        if (ferror(fp))
+            perror("Error al escribir");
     }
 }

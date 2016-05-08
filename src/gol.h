@@ -23,10 +23,13 @@ enum estado {
 // Estrcutura para getopt
 static struct option long_options[] =
 {
-    {"help",         no_argument,          0,  'h'},
     {"tamaño",       required_argument,    0,  't'},
     {"simulaciones", required_argument,    0,  's'},
+    {"conocido",     required_argument,    0,  'c'},
     {"random",       no_argument,          0,  'r'},
+    {"fconfig",      required_argument,    0,  'f'},
+    {"festado",      required_argument,    0,  'e'},
+    {"help",         no_argument,          0,  'h'},
     {0, 0, 0, 0}
 };
 
@@ -48,5 +51,11 @@ bool checkLimit(int x, int y,int tam);
 
 // Inicializa el mundo con un estado aleatorio
 void mundoAleatorio(struct mundo *a);
+
+// Inicializa el mundo con un estado conocido
+void mundoConocido(struct mundo *m, char *c);
+
+// Guarda el estado final
+void printFinal(struct mundo *m);
 
 #endif
