@@ -35,3 +35,8 @@ Las **transiciones** dependen del número de células vecinas vivas:
 	 -h: Muestra esta ayuda
 ```
 ![alt tag](https://cloud.githubusercontent.com/assets/13216600/14388532/dac91774-fdae-11e5-91c8-4dafa88a84aa.png)
+
+## Documentos clases
+Este curso ofrecerá una visión moderna de la programación en C, partiendo de los estándares de C99 y C11. Se realizará siempre un enfoque práctico. Es por ello que el curso introducirá al estudiante en el uso de las bibliotecas nativas en C de referencia para el desarrollo de software en entornos gráficos, red, importación/exportación de datos de ficheros y bases de datos.
+
+En este repositorio se creará un directorio por cada clase, en el que a parte de los ejercicios y prácticas que se realicen, también se incluirá un resumen de la clase y algunos anexos con material extra.
